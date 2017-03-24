@@ -25,10 +25,10 @@ Compile and run!
 * Optimized for 60Hz screens
 
 ## Credits
-Pacman and related property is Copyrighted by Bandai / Namco / Midway
-Some of this code is repurposed from Lazy Foo's tutorials.
-They can be found [here](http://lazyfoo.net/).
-Sounds from Twisty
+* Pacman and related property is Copyrighted by Bandai / Namco / Midway
+* Some of this code is repurposed from Lazy Foo's tutorials.
+* They can be found [here](http://lazyfoo.net/).
+* Sounds from Twisty
 
 ## License
 This code can only be used for personal use.
