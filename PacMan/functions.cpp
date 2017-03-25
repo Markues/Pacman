@@ -245,10 +245,10 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] )
 	for( int i = 0; i < TOTAL_TILES; ++i )
 	{
 		//If the tile is a wall type tile
-		if( ( tiles[ i ]->getType() >= TILE_CENTER ) && ( tiles[ i ]->getType() <= TILE_TOPLEFT ) )
+		if((tiles[i]->getType() != TILE_EMPTY) && (tiles[i]->getType() != TILE_FOOD) && (tiles[i]->getType() != TILE_POWER))
 		{
 			//If the collision box touches the wall tile
-			if( checkCollision( box, tiles[ i ]->getBox() ) )
+			if(checkCollision(box, tiles[i]->getBox()))
 			{
 				return true;
 			}

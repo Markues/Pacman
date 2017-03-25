@@ -5,10 +5,10 @@
 Dot::Dot()
 {
 	//Initialize the collision box
-	mBox.x = 0;
-	mBox.y = 0;
-	mBox.w = DOT_WIDTH;
-	mBox.h = DOT_HEIGHT;
+	mBox.x = 108;
+	mBox.y = 208;
+	mBox.w = DOT_WIDTH / 2;
+	mBox.h = DOT_HEIGHT / 2;
 	
 	//Initialize the velocity
 	mVelX = 0;
@@ -49,17 +49,25 @@ void Dot::move( Tile *tiles[] )
 	mBox.x += mVelX;
 	
 	//If the dot went too far to the left or right or touched a wall
-	if( ( mBox.x < 0 ) || ( mBox.x + DOT_WIDTH > LEVEL_WIDTH ) || touchesWall( mBox, tiles ) )
+	if(touchesWall(mBox, tiles))
 	{
 		//move back
 		mBox.x -= mVelX;
+	}
+	
+	if(mBox.x < 0 - DOT_WIDTH) {
+		mBox.x = LEVEL_WIDTH;
+	}
+	
+	if(mBox.x > LEVEL_WIDTH) {
+		mBox.x = 0 - DOT_WIDTH;
 	}
 	
 	//Move the dot up or down
 	mBox.y += mVelY;
 	
 	//If the dot went too far up or down or touched a wall
-	if( ( mBox.y < 0 ) || ( mBox.y + DOT_HEIGHT > LEVEL_HEIGHT ) || touchesWall( mBox, tiles ) )
+	if(mBox.x < 0 || mBox.x + DOT_WIDTH / 2 > LEVEL_WIDTH || touchesWall(mBox, tiles))
 	{
 		//move back
 		mBox.y -= mVelY;
@@ -69,6 +77,6 @@ void Dot::move( Tile *tiles[] )
 void Dot::render()
 {
 	//Show the dot
-	gDotTexture.render(mBox.x, mBox.y);
+	gDotTexture.render(mBox.x - 4, mBox.y - 4);
 }
 
