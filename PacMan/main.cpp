@@ -33,10 +33,7 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			//The dot that will be moving around on the screen
-			//Dot dot;
-			
-			//Level camera
-			SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+			Dot dot;
 			
 			//While application is running
 			while( !quit )
@@ -51,12 +48,11 @@ int main(int argc, char* args[]) {
 					}
 					
 					//Handle input for the dot
-					//dot.handleEvent( e );
+					dot.handleEvent( e );
 				}
 				
 				//Move the dot
-				//dot.move( tileSet );
-				//dot.setCamera( camera );
+				dot.move( tileSet );
 				
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
@@ -65,11 +61,11 @@ int main(int argc, char* args[]) {
 				//Render level
 				for( int i = 0; i < TOTAL_TILES; ++i )
 				{
-					tileSet[ i ]->render( camera );
+					tileSet[i]->render();
 				}
 				
 				//Render dot
-				//dot.render( camera );
+				dot.render();
 				
 				//Update screen
 				SDL_RenderPresent( gRenderer );

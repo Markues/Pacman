@@ -58,7 +58,7 @@ public:
 	Tile( int x, int y, int tileType );
 	
 	//Shows the tile
-	void render( SDL_Rect& camera );
+	void render();
 	
 	//Get the tile type
 	int getType();
@@ -78,11 +78,11 @@ private:
 class Dot {
 public:
 	//The dimensions of the dot
-	static const int DOT_WIDTH = 20;
-	static const int DOT_HEIGHT = 20;
+	static const int DOT_WIDTH = 16;
+	static const int DOT_HEIGHT = 16;
 	
 	//Maximum axis velocity of the dot
-	static const int DOT_VEL = 10;
+	static const int DOT_VEL = 4;
 	
 	//Initializes the variables
 	Dot();
@@ -93,11 +93,8 @@ public:
 	//Moves the dot and check collision against tiles
 	void move( Tile *tiles[] );
 	
-	//Centers the camera over the dot
-	void setCamera( SDL_Rect& camera );
-	
 	//Shows the dot on the screen
-	void render( SDL_Rect& camera );
+	void render();
 	
 private:
 	//Collision box of the dot
