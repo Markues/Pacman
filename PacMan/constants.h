@@ -14,8 +14,8 @@ const int TILE_WIDTH = 8;
 const int TILE_HEIGHT = 8;
 const int TOTAL_TILES = 1008;
 const int TILES_PER_ROW = 16;
-const int NUM_TILE_ROWS = 8;
-const int TOTAL_TILE_SPRITES = 128;
+const int NUM_TILE_ROWS = 3;
+const int TOTAL_TILE_SPRITES = 36;
 
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;

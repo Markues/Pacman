@@ -227,6 +227,9 @@ bool setTiles( Tile* tiles[] )
 					gTileClips[currentTile].y = i * TILE_HEIGHT;
 					gTileClips[currentTile].w = TILE_WIDTH;
 					gTileClips[currentTile].h = TILE_HEIGHT;
+					if(currentTile >= TOTAL_TILES) {
+						break;
+					}
 				}
 			}
 		}
