@@ -29,7 +29,7 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			// The dot that will be moving around on the screen
-			Dot dot(108, 208);
+			MoveableEntity moveableEntity(108, 208);
 			
 			// While application is running
 			while(!quit) {
@@ -41,11 +41,11 @@ int main(int argc, char* args[]) {
 					}
 					
 					// Handle input for the dot
-					dot.handleEvent( e );
+					moveableEntity.handleEvent( e );
 				}
 				
 				// Move the dot
-				dot.move( tileSet );
+				moveableEntity.move( tileSet );
 				
 				// Clear screen
 				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
@@ -57,7 +57,7 @@ int main(int argc, char* args[]) {
 				}
 				
 				// Render dot
-				dot.render();
+				moveableEntity.render();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);

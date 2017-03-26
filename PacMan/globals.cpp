@@ -9,5 +9,5 @@ SDL_Renderer* gRenderer = NULL;
 
 // Scene textures
 LTexture gDotTexture;
-LTexture gTileTexture;
+LTexture gSpriteSheetTexture;
 SDL_Rect gTileClips[TOTAL_TILE_SPRITES];

@@ -17,6 +17,7 @@ const int TILES_PER_ROW = 16;
 const int NUM_TILE_ROWS = 3;
 const int TOTAL_TILE_SPRITES = 36;
 
+// Moveable tiles
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;
 const int TILE_POWER = 35;

@@ -62,8 +62,8 @@ bool loadMedia(Tile* tiles[]) {
 	}
 	
 	// Load tile texture
-	if(!gTileTexture.loadFromFile("spritesheet.png")) {
-		printf("Failed to load tile set texture!\n");
+	if(!gSpriteSheetTexture.loadFromFile("spritesheet.png")) {
+		printf("Failed to load spritesheet texture!\n");
 		success = false;
 	}
 	
@@ -87,7 +87,7 @@ void close(Tile* tiles[]) {
 	
 	// Free loaded images
 	gDotTexture.free();
-	gTileTexture.free();
+	gSpriteSheetTexture.free();
 	
 	// Destroy window
 	SDL_DestroyRenderer(gRenderer);

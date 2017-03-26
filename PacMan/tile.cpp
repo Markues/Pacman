@@ -17,7 +17,7 @@ Tile::Tile(int x, int y, int tileType) {
 
 void Tile::render() {
 	// Show the tile
-	gTileTexture.render(mBox.x, mBox.y, &gTileClips[mType]);
+	gSpriteSheetTexture.render(mBox.x, mBox.y, &gTileClips[mType]);
 }
 
 int Tile::getType() {

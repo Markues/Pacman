@@ -74,35 +74,33 @@ private:
 	int mType;
 };
 
-// The dot that will move around on the screen
-class Dot {
+class MoveableEntity {
 public:
-	// The dimensions of the dot
-	static const int DOT_WIDTH = 16;
-	static const int DOT_HEIGHT = 16;
+	static const int ENTITY_WIDTH = 16;
+	static const int ENTITY_HEIGHT = 16;
 	
 	static const int COLL_BOX_OFFSET = 4;
 	
-	// Maximum axis velocity of the dot
-	static const int DOT_VEL = 2;
+	// Maximum axis velocity
+	static const int ENTITY_VEL = 2;
 	
 	// Initializes the variables
-	Dot(int startX, int startY);
+	MoveableEntity(int startX, int startY);
 	
-	// Takes key presses and adjusts the dot's velocity
+	// Handle key presses
 	void handleEvent(SDL_Event& e);
 	
-	// Moves the dot and check collision against tiles
+	// Moves the entity and check collision against tiles
 	void move(Tile *tiles[]);
 	
-	// Shows the dot on the screen
+	// Shows the entity on the screen
 	void render();
 	
 private:
-	// Collision box of the dot
+	// Collision box
 	SDL_Rect mBox;
 	
-	// The velocity of the dot
+	// The velocity
 	int mVelX, mVelY;
 };
 

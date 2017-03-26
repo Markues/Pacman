@@ -11,7 +11,7 @@ extern SDL_Renderer* gRenderer;
 
 // Scene textures
 extern LTexture gDotTexture;
-extern LTexture gTileTexture;
+extern LTexture gSpriteSheetTexture;
 extern SDL_Rect gTileClips[TOTAL_TILE_SPRITES];
 
 #endif
