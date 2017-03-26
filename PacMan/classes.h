@@ -51,58 +51,58 @@ private:
 	int mHeight;
 };
 
-//The tile
+// The tile
 class Tile {
 public:
-	//Initializes position and type
-	Tile( int x, int y, int tileType );
+	// Initializes position and type
+	Tile(int x, int y, int tileType);
 	
-	//Shows the tile
+	// Shows the tile
 	void render();
 	
-	//Get the tile type
+	// Get the tile type
 	int getType();
 	
-	//Get the collision box
+	// Get the collision box
 	SDL_Rect getBox();
 	
 private:
-	//The attributes of the tile
+	// The attributes of the tile
 	SDL_Rect mBox;
 	
-	//The tile type
+	// The tile type
 	int mType;
 };
 
-//The dot that will move around on the screen
+// The dot that will move around on the screen
 class Dot {
 public:
-	//The dimensions of the dot
+	// The dimensions of the dot
 	static const int DOT_WIDTH = 16;
 	static const int DOT_HEIGHT = 16;
 	
 	static const int COLL_BOX_OFFSET = 4;
 	
-	//Maximum axis velocity of the dot
+	// Maximum axis velocity of the dot
 	static const int DOT_VEL = 2;
 	
-	//Initializes the variables
+	// Initializes the variables
 	Dot(int startX, int startY);
 	
-	//Takes key presses and adjusts the dot's velocity
-	void handleEvent( SDL_Event& e );
+	// Takes key presses and adjusts the dot's velocity
+	void handleEvent(SDL_Event& e);
 	
-	//Moves the dot and check collision against tiles
-	void move( Tile *tiles[] );
+	// Moves the dot and check collision against tiles
+	void move(Tile *tiles[]);
 	
-	//Shows the dot on the screen
+	// Shows the dot on the screen
 	void render();
 	
 private:
-	//Collision box of the dot
+	// Collision box of the dot
 	SDL_Rect mBox;
 	
-	//The velocity of the dot
+	// The velocity of the dot
 	int mVelX, mVelY;
 };
 

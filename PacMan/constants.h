@@ -1,15 +1,15 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-//Screen dimension constants
+// Screen dimension constants
 const int SCREEN_WIDTH = 224;
 const int SCREEN_HEIGHT = 288;
 
-//The dimensions of the level
+// The dimensions of the level
 const int LEVEL_WIDTH = 224;
 const int LEVEL_HEIGHT = 288;
 
-//Tile constants
+// Tile constants
 const int TILE_WIDTH = 8;
 const int TILE_HEIGHT = 8;
 const int TOTAL_TILES = 1008;

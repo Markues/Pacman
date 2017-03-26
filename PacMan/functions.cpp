@@ -51,175 +51,154 @@ bool init() {
 	return success;
 }
 
-bool loadMedia( Tile* tiles[] )
-{
-	//Loading success flag
+bool loadMedia(Tile* tiles[]) {
+	// Loading success flag
 	bool success = true;
 	
-	//Load dot texture
-	if( !gDotTexture.loadFromFile( "dot.bmp" ) )
-	{
-		printf( "Failed to load dot texture!\n" );
+	// Load dot texture
+	if(!gDotTexture.loadFromFile("dot.bmp")) {
+		printf("Failed to load dot texture!\n");
 		success = false;
 	}
 	
-	//Load tile texture
-	if( !gTileTexture.loadFromFile( "spritesheet.png" ) )
-	{
-		printf( "Failed to load tile set texture!\n" );
+	// Load tile texture
+	if(!gTileTexture.loadFromFile("spritesheet.png")) {
+		printf("Failed to load tile set texture!\n");
 		success = false;
 	}
 	
-	//Load tile map
-	if( !setTiles( tiles ) )
-	{
-		printf( "Failed to load tile set!\n" );
+	// Load tile map
+	if(!setTiles(tiles)) {
+		printf("Failed to load tile set!\n");
 		success = false;
 	}
 	
 	return success;
 }
 
-void close( Tile* tiles[] )
-{
-	//Deallocate tiles
-	for( int i = 0; i < TOTAL_TILES; ++i )
-	{
-		if( tiles[ i ] == NULL )
-		{
+void close(Tile* tiles[]) {
+	// Deallocate tiles
+	for(int i = 0; i < TOTAL_TILES; ++i) {
+		if(tiles[i] == NULL) {
 			delete tiles[ i ];
-			tiles[ i ] = NULL;
+			tiles[i] = NULL;
 		}
 	}
 	
-	//Free loaded images
+	// Free loaded images
 	gDotTexture.free();
 	gTileTexture.free();
 	
-	//Destroy window
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
+	// Destroy window
+	SDL_DestroyRenderer(gRenderer);
+	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
 	gRenderer = NULL;
 	
-	//Quit SDL subsystems
+	// Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
 }
 
-bool checkCollision( SDL_Rect a, SDL_Rect b )
-{
-	//The sides of the rectangles
+bool checkCollision(SDL_Rect a, SDL_Rect b) {
+	// The sides of the rectangles
 	int leftA, leftB;
 	int rightA, rightB;
 	int topA, topB;
 	int bottomA, bottomB;
 	
-	//Calculate the sides of rect A
+	// Calculate the sides of rect A
 	leftA = a.x;
 	rightA = a.x + a.w;
 	topA = a.y;
 	bottomA = a.y + a.h;
 	
-	//Calculate the sides of rect B
+	// Calculate the sides of rect B
 	leftB = b.x;
 	rightB = b.x + b.w;
 	topB = b.y;
 	bottomB = b.y + b.h;
 	
-	//If any of the sides from A are outside of B
-	if( bottomA <= topB )
-	{
+	// If any of the sides from A are outside of B
+	if(bottomA <= topB) {
 		return false;
 	}
 	
-	if( topA >= bottomB )
-	{
+	if(topA >= bottomB) {
 		return false;
 	}
 	
-	if( rightA <= leftB )
-	{
+	if(rightA <= leftB) {
 		return false;
 	}
 	
-	if( leftA >= rightB )
-	{
+	if(leftA >= rightB) {
 		return false;
 	}
 	
-	//If none of the sides from A are outside B
+	// If none of the sides from A are outside B
 	return true;
 }
 
-bool setTiles( Tile* tiles[] )
-{
-	//Success flag
+bool setTiles(Tile* tiles[]) {
+	// Success flag
 	bool tilesLoaded = true;
 	
-	//The tile offsets
+	// The tile offsets
 	int x = 0, y = 0;
 	
-	//Open the map
-	ifstream map( "Level1.map" );
+	// Open the map
+	ifstream map("Level1.map");
 	
-	//If the map couldn't be loaded
-	if(!map.is_open())
-	{
-		printf( "Unable to load map file!\n" );
+	// If the map couldn't be loaded
+	if(!map.is_open()) {
+		printf("Unable to load map file!\n");
 		tilesLoaded = false;
 	}
-	else
-	{
-		//Initialize the tiles
-		for( int i = 0; i < TOTAL_TILES; ++i )
-		{
-			//Determines what kind of tile will be made
+	else {
+		// Initialize the tiles
+		for(int i = 0; i < TOTAL_TILES; ++i) {
+			// Determines what kind of tile will be made
 			int tileType = -1;
 			
-			//Read tile from map file
+			// Read tile from map file
 			map >> tileType;
 			
-			//If the was a problem in reading the map
-			if( map.fail() )
-			{
-				//Stop loading map
-				printf( "Error loading map: Unexpected end of file!\n" );
+			// If the was a problem in reading the map
+			if(map.fail()) {
+				// Stop loading map
+				printf("Error loading map: Unexpected end of file!\n");
 				tilesLoaded = false;
 				break;
 			}
 			
-			//If the number is a valid tile number
-			if( ( tileType >= 0 ) && ( tileType < TOTAL_TILE_SPRITES ) )
-			{
-				tiles[ i ] = new Tile( x, y, tileType );
+			// If the number is a valid tile number
+			if((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
+				tiles[i] = new Tile(x, y, tileType);
 			}
-			//If we don't recognize the tile type
-			else
-			{
-				//Stop loading map
-				printf( "Error loading map: Invalid tile type at %d!\n", i );
+			// If we don't recognize the tile type
+			else {
+				// Stop loading map
+				printf("Error loading map: Invalid tile type at %d!\n", i);
 				tilesLoaded = false;
 				break;
 			}
 			
-			//Move to next tile spot
+			// Move to next tile spot
 			x += TILE_WIDTH;
 			
-			//If we've gone too far
-			if( x >= LEVEL_WIDTH )
-			{
-				//Move back
+			// If we've gone too far
+			if(x >= LEVEL_WIDTH) {
+				// Move back
 				x = 0;
 				
-				//Move to the next row
+				// Move to the next row
 				y += TILE_HEIGHT;
 			}
 		}
 		
-		//Clip the sprite sheet
-		if( tilesLoaded )
-		{
+		// Clip the sprite sheet
+		if(tilesLoaded) {
 			for(int i = 0; i < NUM_TILE_ROWS; i++) {
 				for(int j = 0; j < TILES_PER_ROW; j++) {
 					int currentTile = (i * TILES_PER_ROW) + j;
@@ -235,29 +214,25 @@ bool setTiles( Tile* tiles[] )
 		}
 	}
 	
-	//Close the file
+	// Close the file
 	map.close();
 	
-	//If the map was loaded fine
+	// If the map was loaded fine
 	return tilesLoaded;
 }
 
-bool touchesWall( SDL_Rect box, Tile* tiles[] )
-{
-	//Go through the tiles
-	for( int i = 0; i < TOTAL_TILES; ++i )
-	{
-		//If the tile is a wall type tile
-		if((tiles[i]->getType() != TILE_EMPTY) && (tiles[i]->getType() != TILE_FOOD) && (tiles[i]->getType() != TILE_POWER))
-		{
-			//If the collision box touches the wall tile
-			if(checkCollision(box, tiles[i]->getBox()))
-			{
+bool touchesWall(SDL_Rect box, Tile* tiles[]) {
+	// Go through the tiles
+	for(int i = 0; i < TOTAL_TILES; ++i) {
+		// If the tile is a wall type tile
+		if((tiles[i]->getType() != TILE_EMPTY) && (tiles[i]->getType() != TILE_FOOD) && (tiles[i]->getType() != TILE_POWER)) {
+			// If the collision box touches the wall tile
+			if(checkCollision(box, tiles[i]->getBox())) {
 				return true;
 			}
 		}
 	}
 	
-	//If no wall tiles were touched
+	// If no wall tiles were touched
 	return false;
 }

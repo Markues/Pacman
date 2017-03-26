@@ -9,9 +9,9 @@ extern SDL_Window* gWindow;
 // The window renderer
 extern SDL_Renderer* gRenderer;
 
-//Scene textures
+// Scene textures
 extern LTexture gDotTexture;
 extern LTexture gTileTexture;
-extern SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
+extern SDL_Rect gTileClips[TOTAL_TILE_SPRITES];
 
 #endif
