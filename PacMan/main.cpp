@@ -33,7 +33,7 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			//The dot that will be moving around on the screen
-			Dot dot;
+			Dot dot = new Dot(108, 208);
 			
 			//While application is running
 			while( !quit )

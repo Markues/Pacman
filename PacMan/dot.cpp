@@ -2,11 +2,11 @@
 #include "globals.h"
 #include "functions.h"
 
-Dot::Dot()
+Dot::Dot(int startX, int startY)
 {
 	//Initialize the collision box
-	mBox.x = 108;
-	mBox.y = 208;
+	mBox.x = startX;
+	mBox.y = startY;
 	mBox.w = DOT_WIDTH / 2;
 	mBox.h = DOT_HEIGHT / 2;
 	
@@ -77,6 +77,6 @@ void Dot::move( Tile *tiles[] )
 void Dot::render()
 {
 	//Show the dot
-	gDotTexture.render(mBox.x - 4, mBox.y - 4);
+	gDotTexture.render(mBox.x - COLL_BOX_OFFSET, mBox.y - COLL_BOX_OFFSET);
 }
 

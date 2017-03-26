@@ -222,7 +222,7 @@ bool setTiles( Tile* tiles[] )
 		{
 			for(int i = 0; i < NUM_TILE_ROWS; i++) {
 				for(int j = 0; j < TILES_PER_ROW; j++) {
-					int currentTile = (i * 16) + j;
+					int currentTile = (i * TILES_PER_ROW) + j;
 					gTileClips[currentTile].x = j * TILE_WIDTH;
 					gTileClips[currentTile].y = i * TILE_HEIGHT;
 					gTileClips[currentTile].w = TILE_WIDTH;

@@ -81,11 +81,13 @@ public:
 	static const int DOT_WIDTH = 16;
 	static const int DOT_HEIGHT = 16;
 	
+	static const int COLL_BOX_OFFSET = 4;
+	
 	//Maximum axis velocity of the dot
 	static const int DOT_VEL = 2;
 	
 	//Initializes the variables
-	Dot();
+	Dot(int startX, int startY);
 	
 	//Takes key presses and adjusts the dot's velocity
 	void handleEvent( SDL_Event& e );
