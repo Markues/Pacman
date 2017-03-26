@@ -29,7 +29,10 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			// The dot that will be moving around on the screen
-			MoveableEntity moveableEntity(108, 208);
+			MoveableEntity moveableEntity(104, 204);
+			
+			//Keeps track of time between steps
+			LTimer stepTimer;
 			
 			// While application is running
 			while(!quit) {
@@ -44,8 +47,14 @@ int main(int argc, char* args[]) {
 					moveableEntity.handleEvent( e );
 				}
 				
+				//Calculate time step
+				float timeStep = stepTimer.getTicks() / 1000.f;
+				
 				// Move the dot
-				moveableEntity.move( tileSet );
+				moveableEntity.move(tileSet, timeStep);
+				
+				//Restart step timer
+				stepTimer.start();
 				
 				// Clear screen
 				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);

@@ -67,6 +67,37 @@ private:
 	int mHeight;
 };
 
+// The application timer
+class LTimer {
+public:
+	// Initializes variables
+	LTimer();
+	
+	// The various clock actions
+	void start();
+	void stop();
+	void pause();
+	void unpause();
+	
+	// Gets the timer's time
+	Uint32 getTicks();
+	
+	// Checks the status of the timer
+	bool isStarted();
+	bool isPaused();
+	
+private:
+	// The clock time when the timer started
+	Uint32 mStartTicks;
+	
+	// The ticks stored when the timer was paused
+	Uint32 mPausedTicks;
+	
+	// The timer status
+	bool mPaused;
+	bool mStarted;
+};
+
 // The tile
 class Tile {
 public:
@@ -98,7 +129,7 @@ public:
 	static const int COLL_BOX_OFFSET = 4;
 	
 	// Maximum axis velocity
-	static const int ENTITY_VEL = 2;
+	static const int ENTITY_VEL = 64;
 	
 	// Initializes the variables
 	MoveableEntity(int startX, int startY);
@@ -107,7 +138,7 @@ public:
 	void handleEvent(SDL_Event& e);
 	
 	// Moves the entity and check collision against tiles
-	void move(Tile *tiles[]);
+	void move(Tile *tiles[], float timeStep);
 	
 	// Shows the entity on the screen
 	void render();
@@ -116,8 +147,8 @@ private:
 	// Collision box
 	SDL_Rect mBox;
 	
-	// The velocity
-	int mVelX, mVelY;
+	float mPosX, mPosY;
+	float mVelX, mVelY;
 };
 
 #endif

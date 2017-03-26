@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <string>
 #include "classes.h"
@@ -20,7 +19,7 @@ LTexture::~LTexture() {
 	free();
 }
 
-bool LTexture::loadFromFile(std::string path) {
+bool LTexture::loadFromFile(string path) {
 	// Get rid of preexisting texture
 	free();
 	
