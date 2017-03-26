@@ -22,7 +22,6 @@ Compile and run!
 
 ## Controls and Game Info
 * Use the arrow keys to move
-* Optimized for 60Hz screens
 
 ## Credits
 * Pacman and related property is Copyrighted by Bandai / Namco / Midway
