@@ -8,6 +8,6 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 // Scene textures
-LTexture gDotTexture;
-LTexture gSpriteSheetTexture;
+GameTexture gDotTexture;
+GameTexture gSpriteSheetTexture;
 SDL_Rect gTileClips[TOTAL_TILE_SPRITES];

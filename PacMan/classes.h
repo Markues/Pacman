@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class LTexture {
+class GameTexture {
 public:
 	// Initializes variables
-	LTexture();
+	GameTexture();
 	
 	// Deallocates memory
-	~LTexture();
+	~GameTexture();
 	
 	// Loads image at specified path
 	bool loadFromFile(string path);
@@ -68,10 +68,10 @@ private:
 };
 
 // The application timer
-class LTimer {
+class GameTimer {
 public:
 	// Initializes variables
-	LTimer();
+	GameTimer();
 	
 	// The various clock actions
 	void start();

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-LTexture::LTexture() {
+GameTexture::GameTexture() {
 	// Initialize
 	mTexture = NULL;
 	mWidth = 0;
@@ -14,12 +14,12 @@ LTexture::LTexture() {
 	mPitch = 0;
 }
 
-LTexture::~LTexture() {
+GameTexture::~GameTexture() {
 	// Deallocate
 	free();
 }
 
-bool LTexture::loadFromFile(string path) {
+bool GameTexture::loadFromFile(string path) {
 	// Get rid of preexisting texture
 	free();
 	
@@ -91,7 +91,7 @@ bool LTexture::loadFromFile(string path) {
 }
 
 #ifdef _SDL_TTF_H
-bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor) {
+bool GameTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor) {
 	// Get rid of preexisting texture
 	free();
 	
@@ -122,7 +122,7 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 }
 #endif
 
-bool LTexture::createBlank(int width, int height, SDL_TextureAccess access) {
+bool GameTexture::createBlank(int width, int height, SDL_TextureAccess access) {
 	// Create uninitialized texture
 	mTexture = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_RGBA8888, access, width, height);
 	if(mTexture == NULL) {
@@ -136,7 +136,7 @@ bool LTexture::createBlank(int width, int height, SDL_TextureAccess access) {
 	return mTexture != NULL;
 }
 
-void LTexture::free() {
+void GameTexture::free() {
 	// Free texture if it exists
 	if(mTexture != NULL) {
 		SDL_DestroyTexture(mTexture);
@@ -148,22 +148,22 @@ void LTexture::free() {
 	}
 }
 
-void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue) {
+void GameTexture::setColor(Uint8 red, Uint8 green, Uint8 blue) {
 	// Modulate texture rgb
 	SDL_SetTextureColorMod( mTexture, red, green, blue );
 }
 
-void LTexture::setBlendMode(SDL_BlendMode blending) {
+void GameTexture::setBlendMode(SDL_BlendMode blending) {
 	// Set blending function
 	SDL_SetTextureBlendMode(mTexture, blending);
 }
 
-void LTexture::setAlpha(Uint8 alpha) {
+void GameTexture::setAlpha(Uint8 alpha) {
 	// Modulate texture alpha
 	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void LTexture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip) {
+void GameTexture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip) {
 	// Set rendering space and render to screen
 	SDL_Rect renderQuad = {x, y, mWidth, mHeight};
 	
@@ -177,20 +177,20 @@ void LTexture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* cen
 	SDL_RenderCopyEx(gRenderer, mTexture, clip, &renderQuad, angle, center, flip);
 }
 
-void LTexture::setAsRenderTarget() {
+void GameTexture::setAsRenderTarget() {
 	// Make self render target
 	SDL_SetRenderTarget(gRenderer, mTexture);
 }
 
-int LTexture::getWidth() {
+int GameTexture::getWidth() {
 	return mWidth;
 }
 
-int LTexture::getHeight() {
+int GameTexture::getHeight() {
 	return mHeight;
 }
 
-bool LTexture::lockTexture() {
+bool GameTexture::lockTexture() {
 	bool success = true;
 	
 	// Texture is already locked
@@ -209,7 +209,7 @@ bool LTexture::lockTexture() {
 	return success;
 }
 
-bool LTexture::unlockTexture() {
+bool GameTexture::unlockTexture() {
 	bool success = true;
 	
 	// Texture is not locked
@@ -227,11 +227,11 @@ bool LTexture::unlockTexture() {
 	return success;
 }
 
-void* LTexture::getPixels() {
+void* GameTexture::getPixels() {
 	return mPixels;
 }
 
-void LTexture::copyPixels(void* pixels) {
+void GameTexture::copyPixels(void* pixels) {
 	// Texture is locked
 	if(mPixels != NULL) {
 		// Copy to locked pixels
@@ -239,11 +239,11 @@ void LTexture::copyPixels(void* pixels) {
 	}
 }
 
-int LTexture::getPitch() {
+int GameTexture::getPitch() {
 	return mPitch;
 }
 
-Uint32 LTexture::getPixel32(unsigned int x, unsigned int y) {
+Uint32 GameTexture::getPixel32(unsigned int x, unsigned int y) {
 	// Convert the pixels to 32 bit
 	Uint32 *pixels = (Uint32*)mPixels;
 	

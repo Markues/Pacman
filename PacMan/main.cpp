@@ -32,7 +32,7 @@ int main(int argc, char* args[]) {
 			MoveableEntity moveableEntity(104, 204);
 			
 			//Keeps track of time between steps
-			LTimer stepTimer;
+			GameTimer stepTimer;
 			
 			// While application is running
 			while(!quit) {
