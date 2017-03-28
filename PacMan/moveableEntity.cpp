@@ -16,29 +16,6 @@ MoveableEntity::MoveableEntity(int startX, int startY) {
 	mVelY = 0;
 }
 
-void MoveableEntity::handleEvent(SDL_Event& e) {
-	// If a key was pressed
-	if(e.type == SDL_KEYDOWN && e.key.repeat == 0) {
-		// Adjust the velocity
-		switch(e.key.keysym.sym) {
-			case SDLK_UP: mVelY -= ENTITY_VEL; break;
-			case SDLK_DOWN: mVelY += ENTITY_VEL; break;
-			case SDLK_LEFT: mVelX -= ENTITY_VEL; break;
-			case SDLK_RIGHT: mVelX += ENTITY_VEL; break;
-		}
-	}
-	// If a key was released
-	else if(e.type == SDL_KEYUP && e.key.repeat == 0) {
-		// Adjust the velocity
-		switch(e.key.keysym.sym) {
-			case SDLK_UP: mVelY += ENTITY_VEL; break;
-			case SDLK_DOWN: mVelY -= ENTITY_VEL; break;
-			case SDLK_LEFT: mVelX += ENTITY_VEL; break;
-			case SDLK_RIGHT: mVelX -= ENTITY_VEL; break;
-		}
-	}
-}
-
 void MoveableEntity::move(Tile *tiles[], float timeStep) {
 	// Move the MoveableEntity left or right
 	mPosX += mVelX * timeStep;
@@ -73,9 +50,3 @@ void MoveableEntity::move(Tile *tiles[], float timeStep) {
 		mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
 	}
 }
-
-void MoveableEntity::render() {
-	// Show the MoveableEntity
-	gDotTexture.render((int)mPosX, (int)mPosY);
-}
-

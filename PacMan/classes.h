@@ -134,21 +134,61 @@ public:
 	// Initializes the variables
 	MoveableEntity(int startX, int startY);
 	
-	// Handle key presses
-	void handleEvent(SDL_Event& e);
-	
 	// Moves the entity and check collision against tiles
 	void move(Tile *tiles[], float timeStep);
 	
 	// Shows the entity on the screen
-	void render();
+	virtual void render() = 0;
 	
-private:
+protected:
 	// Collision box
 	SDL_Rect mBox;
 	
 	float mPosX, mPosY;
 	float mVelX, mVelY;
+};
+
+class Pacman: public MoveableEntity {
+public:
+	Pacman(int startX, int startY):
+		MoveableEntity(startX, startY) {
+			animState = P_ANIM_RIGHT;
+			
+			// Move anims
+			for(int i = 0; i < P_SPRITES_PER_ROW; i++) {
+				for(int j = 0; j < P_SPRITES_PER_COL; j++) {
+					int currentTile = (i * P_SPRITES_PER_COL) + j;
+					renderBoxes[currentTile].x = i * TILE_WIDTH;
+					renderBoxes[currentTile].y = SPRITE_START_Y + (j * TILE_HEIGHT);
+					renderBoxes[currentTile].w = SPRITE_WIDTH;
+					renderBoxes[currentTile].h = SPRITE_HEIGHT;
+				}
+			}
+			
+			// Death anim
+			for(int i = 0; i < P_SPRITES_PER_COL; i++) {
+				for(int j = 0; j < P_SPRITES_PER_ROW; j++) {
+					int currentTile = (i * P_SPRITES_PER_ROW) + j;
+					renderBoxes[currentTile].x = DEATH_ANIM_START_X + (j * TILE_WIDTH);
+					renderBoxes[currentTile].y = SPRITE_START_Y + (i * TILE_HEIGHT);
+					renderBoxes[currentTile].w = SPRITE_WIDTH;
+					renderBoxes[currentTile].h = SPRITE_HEIGHT;
+				}
+			}
+		};
+	
+	// Handle key presses
+	void handleEvent(SDL_Event& e);
+	
+	virtual void render();
+	
+private:
+	SDL_Rect renderBoxes[P_TOTAL_SPRITES];
+	
+	PACMAN_ANIM_STATE animState;
+	
+	const int SPRITE_START_Y = 144;
+	const int DEATH_ANIM_START_X = 64;
 };
 
 #endif

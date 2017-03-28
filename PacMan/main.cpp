@@ -29,7 +29,7 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			// The dot that will be moving around on the screen
-			MoveableEntity moveableEntity(104, 204);
+			Pacman pacman(104, 204);
 			
 			//Keeps track of time between steps
 			GameTimer stepTimer;
@@ -44,14 +44,14 @@ int main(int argc, char* args[]) {
 					}
 					
 					// Handle input for the dot
-					moveableEntity.handleEvent( e );
+					pacman.handleEvent(e);
 				}
 				
 				//Calculate time step
 				float timeStep = stepTimer.getTicks() / 1000.f;
 				
 				// Move the dot
-				moveableEntity.move(tileSet, timeStep);
+				pacman.move(tileSet, timeStep);
 				
 				//Restart step timer
 				stepTimer.start();
@@ -66,7 +66,7 @@ int main(int argc, char* args[]) {
 				}
 				
 				// Render dot
-				moveableEntity.render();
+				pacman.render();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);
