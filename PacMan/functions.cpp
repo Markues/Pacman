@@ -55,12 +55,6 @@ bool loadMedia(Tile* tiles[]) {
 	// Loading success flag
 	bool success = true;
 	
-	// Load dot texture
-	if(!gDotTexture.loadFromFile("dot.bmp")) {
-		printf("Failed to load dot texture!\n");
-		success = false;
-	}
-	
 	// Load tile texture
 	if(!gSpriteSheetTexture.loadFromFile("spritesheet.png")) {
 		printf("Failed to load spritesheet texture!\n");
@@ -86,7 +80,6 @@ void close(Tile* tiles[]) {
 	}
 	
 	// Free loaded images
-	gDotTexture.free();
 	gSpriteSheetTexture.free();
 	
 	// Destroy window

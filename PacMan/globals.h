@@ -10,7 +10,6 @@ extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 
 // Scene textures
-extern GameTexture gDotTexture;
 extern GameTexture gSpriteSheetTexture;
 extern SDL_Rect gTileClips[TOTAL_TILE_SPRITES];
 
