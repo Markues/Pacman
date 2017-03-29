@@ -13,6 +13,8 @@ const int TILE_WIDTH = 8;
 const int TILE_HEIGHT = 8;
 const int SPRITE_WIDTH = 16;
 const int SPRITE_HEIGHT = 16;
+const int SPRITE_HITBOX_WIDTH = 8;
+const int SPRITE_HITBOX_HEIGHT = 8;
 
 const int TOTAL_TILES = 1008;
 const int TILES_PER_ROW = 16;
@@ -31,11 +33,16 @@ const int TILE_FOOD = 34;
 const int TILE_POWER = 35;
 
 enum PACMAN_ANIM_STATE {
-	P_ANIM_RIGHT = 0,
-	P_ANIM_LEFT = 1,
-	P_ANIM_UP = 2,
-	P_ANIM_DOWN = 3,
-	P_ANIM_DEATH = 4
+	P_STATIC_NEUTRAL = 0,
+	P_ANIM_RIGHT = 1,
+	P_STATIC_RIGHT = 2,
+	P_ANIM_LEFT = 3,
+	P_STATIC_LEFT = 4,
+	P_ANIM_UP = 5,
+	P_STATIC_UP = 6,
+	P_ANIM_DOWN = 7,
+	P_STATIC_DOWN = 8,
+	P_ANIM_DEATH = 9
 };
 
 enum GHOST_ANIM_STATE {
