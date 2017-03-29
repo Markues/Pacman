@@ -9,21 +9,23 @@ void Pacman::init() {
 	for(int i = 0; i < P_SPRITES_PER_ROW; i++) {
 		for(int j = 0; j < P_SPRITES_PER_COL; j++) {
 			int currentTile = (i * P_SPRITES_PER_COL) + j;
-			renderBoxes[currentTile].x = i * TILE_WIDTH;
-			renderBoxes[currentTile].y = SPRITE_START_Y + (j * TILE_HEIGHT);
+			renderBoxes[currentTile].x = i * SPRITE_WIDTH;
+			renderBoxes[currentTile].y = SPRITE_START_Y + (j * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
+			printf("%d %d %d\n", currentTile, renderBoxes[currentTile].x, renderBoxes[currentTile].y);
 		}
 	}
 	
 	// Death anim
 	for(int i = 0; i < P_SPRITES_PER_COL; i++) {
 		for(int j = 0; j < P_SPRITES_PER_ROW; j++) {
-			int currentTile = (i * P_SPRITES_PER_ROW) + j;
-			renderBoxes[currentTile].x = DEATH_ANIM_START_X + (j * TILE_WIDTH);
-			renderBoxes[currentTile].y = SPRITE_START_Y + (i * TILE_HEIGHT);
+			int currentTile = (i * P_SPRITES_PER_ROW) + j + 12;
+			renderBoxes[currentTile].x = DEATH_ANIM_START_X + (j * SPRITE_WIDTH);
+			renderBoxes[currentTile].y = SPRITE_START_Y + (i * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
+			printf("%d %d %d\n", currentTile, renderBoxes[currentTile].x, renderBoxes[currentTile].y);
 		}
 	}
 }
@@ -99,18 +101,22 @@ void Pacman::render() {
 		case P_ANIM_RIGHT:
 			break;
 		case P_STATIC_RIGHT:
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[1]);
 			break;
 		case P_ANIM_LEFT:
 			break;
 		case P_STATIC_LEFT:
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[4]);
 			break;
 		case P_ANIM_UP:
 			break;
 		case P_STATIC_UP:
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[7]);
 			break;
 		case P_ANIM_DOWN:
 			break;
 		case P_STATIC_DOWN:
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[10]);
 			break;
 		case P_ANIM_DEATH:
 			break;
