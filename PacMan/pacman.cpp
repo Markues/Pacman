@@ -13,7 +13,6 @@ void Pacman::init() {
 			renderBoxes[currentTile].y = SPRITE_START_Y + (j * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
-			printf("%d %d %d\n", currentTile, renderBoxes[currentTile].x, renderBoxes[currentTile].y);
 		}
 	}
 	
@@ -25,7 +24,6 @@ void Pacman::init() {
 			renderBoxes[currentTile].y = SPRITE_START_Y + (i * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
-			printf("%d %d %d\n", currentTile, renderBoxes[currentTile].x, renderBoxes[currentTile].y);
 		}
 	}
 }
