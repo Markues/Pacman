@@ -17,12 +17,12 @@ bool init() {
 	}
 	else {
 		// Set texture filtering to linear
-		if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
-			printf("Warning: Linear texture filtering not enabled!");
+		if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0")) {
+			printf("Warning: Nearest pixel sampling not enabled!");
 		}
 		
 		// Create window
-		gWindow = SDL_CreateWindow("Pacman", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow("Pacman", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SDL_WINDOW_SHOWN);
 		if(gWindow == NULL) {
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
 			success = false;
@@ -35,6 +35,8 @@ bool init() {
 				success = false;
 			}
 			else {
+				// Set the device independent resolution for rendering 
+				SDL_RenderSetLogicalSize(gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 				// Initialize renderer color
 				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				
