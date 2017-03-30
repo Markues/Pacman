@@ -129,7 +129,7 @@ public:
 	static const int COLL_BOX_OFFSET = 4;
 	
 	// Maximum axis velocity
-	static const int ENTITY_VEL = 64;
+	static const int ENTITY_VEL = 60;
 	
 	// Initializes the variables
 	MoveableEntity(int startX, int startY);
@@ -169,6 +169,7 @@ private:
 	
 	PACMAN_ANIM_STATE animState;
 	PACMAN_ANIM_STATE prospectiveState;
+	char lastKeyPressed;
 	
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;

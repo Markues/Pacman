@@ -5,6 +5,7 @@
 void Pacman::init() {
 	animState = P_STATIC_NEUTRAL;
 	prospectiveState = P_STATIC_NEUTRAL;
+	lastKeyPressed = 'n';
 	
 	// Move anims
 	for(int i = 0; i < P_SPRITES_PER_ROW; i++) {
@@ -36,26 +37,28 @@ void Pacman::handleEvent(SDL_Event& e) {
 			case SDLK_UP:
 				mVelY = -ENTITY_VEL;
 				prospectiveState = P_STATIC_UP;
+				lastKeyPressed = 'u';
 				break;
 			case SDLK_DOWN:
 				mVelY = ENTITY_VEL;
 				prospectiveState = P_STATIC_DOWN;
+				lastKeyPressed = 'd';
 				break;
 			case SDLK_LEFT:
 				mVelX = -ENTITY_VEL;
 				prospectiveState = P_STATIC_LEFT;
+				lastKeyPressed = 'l';
 				break;
 			case SDLK_RIGHT:
 				mVelX = ENTITY_VEL;
 				prospectiveState = P_STATIC_RIGHT;
+				lastKeyPressed = 'r';
 				break;
 		}
 	}
 }
 
-void Pacman::move(Tile *tiles[], float timeStep) {
-	const Uint8 *keys = SDL_GetKeyboardState(NULL);
-	
+void Pacman::move(Tile *tiles[], float timeStep) {	
 	bool touchedWall = false;
 	
 	// Move the MoveableEntity left or right
@@ -68,7 +71,7 @@ void Pacman::move(Tile *tiles[], float timeStep) {
 		// move back
 		mPosX -= mVelX * timeStep;
 		mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
-		if (!(keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_RIGHT])){
+		if (!(lastKeyPressed == 'r' || lastKeyPressed == 'l')){
 			mVelX = 0;
 			touchedWall = false;
 		}
@@ -96,7 +99,7 @@ void Pacman::move(Tile *tiles[], float timeStep) {
 		//move back
 		mPosY -= mVelY * timeStep;
 		mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
-		if (!(keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_DOWN])){
+		if (!(lastKeyPressed == 'd' || lastKeyPressed == 'u')){
 			mVelY = 0;
 			touchedWall = false;
 		}
