@@ -4,6 +4,7 @@
 
 void Pacman::init() {
 	animState = P_STATIC_NEUTRAL;
+	prospectiveState = P_STATIC_NEUTRAL;
 	
 	// Move anims
 	for(int i = 0; i < P_SPRITES_PER_ROW; i++) {
@@ -34,15 +35,19 @@ void Pacman::handleEvent(SDL_Event& e) {
 		switch(e.key.keysym.sym) {
 			case SDLK_UP:
 				mVelY = -ENTITY_VEL;
+				prospectiveState = P_STATIC_UP;
 				break;
 			case SDLK_DOWN:
 				mVelY = ENTITY_VEL;
+				prospectiveState = P_STATIC_DOWN;
 				break;
 			case SDLK_LEFT:
 				mVelX = -ENTITY_VEL;
+				prospectiveState = P_STATIC_LEFT;
 				break;
 			case SDLK_RIGHT:
 				mVelX = ENTITY_VEL;
+				prospectiveState = P_STATIC_RIGHT;
 				break;
 		}
 	}
@@ -51,18 +56,23 @@ void Pacman::handleEvent(SDL_Event& e) {
 void Pacman::move(Tile *tiles[], float timeStep) {
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	
+	bool touchedWall = false;
+	
 	// Move the MoveableEntity left or right
 	mPosX += mVelX * timeStep;
 	mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
 	
 	// If the MoveableEntity went too far to the left or right or touched a wall
 	if(touchesWall(mBox, tiles)) {
+		touchedWall = true;
 		// move back
 		mPosX -= mVelX * timeStep;
 		mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
 		if (!(keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_RIGHT])){
 			mVelX = 0;
+			touchedWall = false;
 		}
+		
 	}
 	
 	if(mBox.x < 0 - ENTITY_WIDTH) {
@@ -82,12 +92,18 @@ void Pacman::move(Tile *tiles[], float timeStep) {
 	
 	// If the MoveableEntity went too far up or down or touched a wall
 	if(mBox.x < 0 || mBox.x + ENTITY_WIDTH / 2 > LEVEL_WIDTH || touchesWall(mBox, tiles)) {
+		touchedWall = true;
 		//move back
 		mPosY -= mVelY * timeStep;
 		mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
 		if (!(keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_DOWN])){
 			mVelY = 0;
+			touchedWall = false;
 		}
+	}
+	
+	if(!touchedWall) {
+		animState = prospectiveState;
 	}
 }
 

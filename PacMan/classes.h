@@ -168,6 +168,7 @@ private:
 	SDL_Rect renderBoxes[P_TOTAL_SPRITES];
 	
 	PACMAN_ANIM_STATE animState;
+	PACMAN_ANIM_STATE prospectiveState;
 	
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;
