@@ -168,7 +168,7 @@ private:
 	SDL_Rect renderBoxes[P_TOTAL_SPRITES];
 	
 	PACMAN_ANIM_STATE animState;
-	PACMAN_ANIM_STATE prospectiveState;
+	PACMAN_ANIM_STATE prospectiveAnimState;
 	char lastKeyPressed;
 	
 	const int SPRITE_START_Y = 144;
