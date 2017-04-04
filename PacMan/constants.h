@@ -27,6 +27,9 @@ const int P_SPRITES_PER_COL = 3;
 const int P_SPRITES_PER_DIR = 3;
 const int P_NUM_DEATH_SPRITES = 12;
 
+const int P_ANIM_MOVE_FRAMES = 3;
+const int P_ANIM_DEATH_FRAMES = 12;
+
 // Moveable tiles
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;

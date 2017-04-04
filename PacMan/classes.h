@@ -138,7 +138,7 @@ public:
 	virtual void move(Tile *tiles[], float timeStep) = 0;
 	
 	// Shows the entity on the screen
-	virtual void render() = 0;
+	virtual void render(int frame) = 0;
 	
 protected:
 	// Collision box
@@ -160,7 +160,7 @@ public:
 	
 	virtual void move(Tile *tiles[], float timeStep);
 	
-	virtual void render();
+	virtual void render(int frame);
 	
 private:
 	void init();

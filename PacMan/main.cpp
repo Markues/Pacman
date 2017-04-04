@@ -34,6 +34,8 @@ int main(int argc, char* args[]) {
 			//Keeps track of time between steps
 			GameTimer stepTimer;
 			
+			int frame = 0;
+			
 			// While application is running
 			while(!quit) {
 				// Handle events on queue
@@ -66,10 +68,16 @@ int main(int argc, char* args[]) {
 				}
 				
 				// Render dot
-				pacman.render();
+				pacman.render(frame);
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);
+				
+				++frame;
+				
+				if(frame / 3 >= P_ANIM_MOVE_FRAMES) {
+					frame = 0;
+				}
 			}
 		}
 		
