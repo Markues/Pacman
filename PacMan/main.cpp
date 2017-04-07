@@ -46,14 +46,15 @@ int main(int argc, char* args[]) {
 					}
 					
 					// Handle input for the dot
-					pacman.handleEvent(e);
+					//pacman.handleEvent(e);
 				}
 				
 				//Calculate time step
 				float timeStep = stepTimer.getTicks() / 1000.f;
 				
 				// Move the dot
-				pacman.move(tileSet, timeStep);
+				//pacman.move(tileSet, timeStep);
+				pacman.update(tileSet, timeStep);
 				
 				//Restart step timer
 				stepTimer.start();
