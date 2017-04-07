@@ -11,6 +11,9 @@ const int LEVEL_HEIGHT = 288;
 
 const int TILE_WIDTH = 8;
 const int TILE_HEIGHT = 8;
+const int TOTAL_VERTICAL_TILES = SCREEN_HEIGHT / TILE_HEIGHT;
+const int TOTAL_HORIZONTAL_TILES = SCREEN_WIDTH / TILE_WIDTH;
+
 const int SPRITE_WIDTH = 16;
 const int SPRITE_HEIGHT = 16;
 const int SPRITE_HITBOX_WIDTH = 8;
@@ -56,6 +59,14 @@ enum GHOST_ANIM_STATE {
 	G_ANIM_RUNAWAY = 4,
 	G_ANIM_RUNAWAY_END = 5,
 	G_ANIM_RESPAWN = 6
+};
+
+enum DIRECTION {
+	LEFT = 0,
+	RIGHT = 1,
+	UP = 2,
+	DOWN = 3,
+	NONE = 4
 };
 
 #endif
