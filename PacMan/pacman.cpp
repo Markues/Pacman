@@ -35,6 +35,12 @@ void Pacman::init() {
 }
 
 void Pacman::update(Tile* tiles[], float timeStep) {
+	// Base case
+	if(currentDirection == NONE && directionToTurn == NONE) {
+		move(RIGHT);
+		//return;
+	}
+	
 	if(touchesWall(mBox, tiles)) {
 		switch (currentDirection) {
 			case LEFT:
@@ -97,27 +103,27 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 	surroundingTiles[UP] = getTileAbove(tiles, mBox.x, mBox.y);
 	surroundingTiles[DOWN] = getTileBelow(tiles, mBox.x, mBox.y);
 	
-	checkInput(tiles, timeStep);
+	checkInput(tiles);
 	
 	if(directionToTurn != NONE) {
-		turn(tiles, timeStep);
+		turn();
 	}
 }
 
-void Pacman::checkInput(Tile* tiles[], float timeStep) {
+void Pacman::checkInput(Tile* tiles[]) {
 	const Uint8 *currentKeyState = SDL_GetKeyboardState(NULL);
 	
 	if(currentKeyState[SDL_SCANCODE_LEFT]) {
-		checkDirection(LEFT, tiles, timeStep);
+		checkDirection(LEFT, tiles);
 	}
 	else if(currentKeyState[SDL_SCANCODE_RIGHT]) {
-		checkDirection(RIGHT, tiles, timeStep);
+		checkDirection(RIGHT, tiles);
 	}
 	else if(currentKeyState[SDL_SCANCODE_UP]) {
-		checkDirection(UP, tiles, timeStep);
+		checkDirection(UP, tiles);
 	}
 	else if(currentKeyState[SDL_SCANCODE_DOWN]) {
-		checkDirection(DOWN, tiles, timeStep);
+		checkDirection(DOWN, tiles);
 	}
 	else {
 		// Forces user to hold key to turn
@@ -125,13 +131,13 @@ void Pacman::checkInput(Tile* tiles[], float timeStep) {
 	}
 }
 
-void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[], float timeStep) {
+void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
 	if(directionToTurn == inputDirToTurn || surroundingTiles[inputDirToTurn]->getType() != TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() != TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() != TILE_POWER) {
 		return;
 	}
 	
 	if(areOpposites(currentDirection, inputDirToTurn)) {
-		move(inputDirToTurn, tiles, timeStep);
+		move(inputDirToTurn);
 	}
 	else {
 		directionToTurn = inputDirToTurn;
@@ -140,22 +146,22 @@ void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[], float timeS
 	}
 }
 
-void Pacman::turn(Tile* tiles[], float timeStep) {
+void Pacman::turn() {
 	if(!(fuzzyEquals(mBox.x, turningPoint.x, 1) || !(fuzzyEquals(mBox.y, turningPoint.y, 1)))) {
 		return;
 	}
 	
-	mPosX = turningPoint.x;
-	mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
-	mPosY = turningPoint.y;
-	mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
+	mBox.x = turningPoint.x;
+	mPosX = ((int)mBox.x) - COLL_BOX_OFFSET;
+	mBox.y = turningPoint.y;
+	mPosY = ((int)mBox.y) - COLL_BOX_OFFSET;
 	
-	move(directionToTurn, tiles, timeStep);
+	move(directionToTurn);
 	
 	directionToTurn = NONE;
 }
 
-void Pacman::move(DIRECTION dirToMove, Tile *tiles[], float timeStep) {
+void Pacman::move(DIRECTION dirToMove) {
 	switch (dirToMove) {
 		case LEFT:
 			mVelX = -ENTITY_VEL;
@@ -180,16 +186,18 @@ void Pacman::move(DIRECTION dirToMove, Tile *tiles[], float timeStep) {
 			printf("ERROR: Somehow dirToMove is NONE");
 			break;
 	}
-	
+	 
+	// Update the currentDirection
+	currentDirection = dirToMove;
+}
+
+void Pacman::actuallyMove(float timeStep) {
 	// Move left or right
 	mPosX += mVelX * timeStep;
 	mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
 	// Move up or down
 	mPosY += mVelY * timeStep;
 	mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
-	
-	// Update the currentDirection
-	currentDirection = dirToMove;
 }
 
 /*

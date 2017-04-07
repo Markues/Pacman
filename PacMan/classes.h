@@ -160,13 +160,15 @@ public:
 	
 	void update(Tile *tiles[], float timeStep);
 	
-	void checkInput(Tile *tiles[], float timeStep);
+	void checkInput(Tile *tiles[]);
 	
-	void checkDirection(DIRECTION inputDirToTurn, Tile *tiles[], float timeStep);
+	void checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]);
 	
-	void turn(Tile *tiles[], float timeStep);
+	void turn();
 	
-	void move(DIRECTION dirToMove, Tile *tiles[], float timeStep);
+	void move(DIRECTION dirToMove);
+	
+	void actuallyMove(float timeStep);
 	
 	//virtual void move(Tile *tiles[], float timeStep);
 	
