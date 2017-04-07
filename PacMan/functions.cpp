@@ -135,7 +135,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b) {
 	return true;
 }
 
-bool setTiles(Tile* tiles[]) {
+bool setTiles(Tile *tiles[]) {
 	// Success flag
 	bool tilesLoaded = true;
 	
@@ -216,7 +216,7 @@ bool setTiles(Tile* tiles[]) {
 	return tilesLoaded;
 }
 
-bool touchesWall(SDL_Rect box, Tile* tiles[]) {
+bool touchesWall(SDL_Rect box, Tile *tiles[]) {
 	// Go through the tiles
 	for(int i = 0; i < TOTAL_TILES; ++i) {
 		// If the tile is a wall type tile
@@ -229,5 +229,67 @@ bool touchesWall(SDL_Rect box, Tile* tiles[]) {
 	}
 	
 	// If no wall tiles were touched
+	return false;
+}
+
+int getCurrentTileIndex(int xPos, int yPos) {
+	return ((yPos / TILE_HEIGHT) * TOTAL_HORIZONTAL_TILES) + (xPos / TILE_WIDTH);
+}
+
+Tile* getTileToLeft(Tile *tiles[], int xPos, int yPos) {
+	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
+	
+	return tiles[currentTileIndex - 1];
+}
+
+Tile* getTileToRight(Tile *tiles[], int xPos, int yPos) {
+	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
+	
+	return tiles[currentTileIndex + 1];
+}
+
+Tile* getTileAbove(Tile *tiles[], int xPos, int yPos) {
+	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
+
+	return tiles[currentTileIndex - TOTAL_HORIZONTAL_TILES];
+}
+
+Tile* getTileBelow(Tile *tiles[], int xPos, int yPos) {
+	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
+	
+	return tiles[currentTileIndex + TOTAL_HORIZONTAL_TILES];
+	
+}
+
+bool fuzzyEquals(int firstNum, int secondNum, int threshold) {
+	return abs(firstNum - secondNum) <= threshold;
+}
+
+bool areOpposites(DIRECTION dirOne, DIRECTION dirTwo) {
+	switch (dirOne) {
+		case LEFT:
+			if(dirTwo == RIGHT) {
+				return true;
+			}
+			break;
+		case RIGHT:
+			if(dirTwo == LEFT) {
+				return true;
+			}
+			break;
+		case UP:
+			if(dirTwo == DOWN) {
+				return true;
+			}
+			break;
+		case DOWN:
+			if(dirTwo == UP) {
+				return true;
+			}
+			break;
+		default:
+			break;
+	}
+	
 	return false;
 }
