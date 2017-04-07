@@ -134,9 +134,6 @@ public:
 	// Initializes the variables
 	MoveableEntity(int startX, int startY);
 	
-	// Moves the entity and check collision against tiles
-	//virtual void move(Tile *tiles[], float timeStep) = 0;
-	
 	// Shows the entity on the screen
 	virtual void render(int frame) = 0;
 	
@@ -155,9 +152,6 @@ public:
 			init();
 		};
 	
-	// Handle key presses
-	//void handleEvent(SDL_Event& e);
-	
 	void update(Tile *tiles[], float timeStep);
 	
 	void checkInput(Tile *tiles[]);
@@ -169,8 +163,6 @@ public:
 	void move(DIRECTION dirToMove);
 	
 	void actuallyMove(float timeStep);
-	
-	//virtual void move(Tile *tiles[], float timeStep);
 	
 	virtual void render(int frame);
 	
@@ -186,8 +178,6 @@ private:
 	Tile *surroundingTiles[4];
 	
 	PACMAN_ANIM_STATE animState;
-	//PACMAN_ANIM_STATE prospectiveAnimState;
-	//char lastKeyPressed;
 	
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;

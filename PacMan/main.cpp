@@ -44,20 +44,16 @@ int main(int argc, char* args[]) {
 					if(e.type == SDL_QUIT) {
 						quit = true;
 					}
-					
-					// Handle input for the dot
-					//pacman.handleEvent(e);
 				}
 				
 				//Calculate time step
 				float timeStep = stepTimer.getTicks() / 1000.f;
 				
-				// Move the dot
-				//pacman.move(tileSet, timeStep);
+				// Move pacman
 				pacman.update(tileSet, timeStep);
 				pacman.actuallyMove(timeStep);
 				
-				//Restart step timer
+				// Restart step timer
 				stepTimer.start();
 				
 				// Clear screen
