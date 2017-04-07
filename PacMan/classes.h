@@ -135,7 +135,7 @@ public:
 	MoveableEntity(int startX, int startY);
 	
 	// Moves the entity and check collision against tiles
-	virtual void move(Tile *tiles[], float timeStep) = 0;
+	//virtual void move(Tile *tiles[], float timeStep) = 0;
 	
 	// Shows the entity on the screen
 	virtual void render(int frame) = 0;
@@ -156,9 +156,19 @@ public:
 		};
 	
 	// Handle key presses
-	void handleEvent(SDL_Event& e);
+	//void handleEvent(SDL_Event& e);
 	
-	virtual void move(Tile *tiles[], float timeStep);
+	void update(Tile *tiles[], float timeStep);
+	
+	void checkInput(Tile *tiles[], float timeStep);
+	
+	void checkDirection(DIRECTION inputDirToTurn, Tile *tiles[], float timeStep);
+	
+	void turn(Tile *tiles[], float timeStep);
+	
+	void move(DIRECTION dirToMove, Tile *tiles[], float timeStep);
+	
+	//virtual void move(Tile *tiles[], float timeStep);
 	
 	virtual void render(int frame);
 	
@@ -167,9 +177,15 @@ private:
 	
 	SDL_Rect renderBoxes[P_TOTAL_SPRITES];
 	
+	DIRECTION currentDirection;
+	DIRECTION directionToTurn;
+	SDL_Point turningPoint;
+	
+	Tile *surroundingTiles[4];
+	
 	PACMAN_ANIM_STATE animState;
-	PACMAN_ANIM_STATE prospectiveAnimState;
-	char lastKeyPressed;
+	//PACMAN_ANIM_STATE prospectiveAnimState;
+	//char lastKeyPressed;
 	
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;
