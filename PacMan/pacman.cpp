@@ -210,15 +210,6 @@ void Pacman::move(DIRECTION dirToMove) {
 	
 	printf("Move Vel:%f,%f Dir:%d\n", mVelX, mVelY, currentDirection);
 }
-
-void Pacman::actuallyMove(float timeStep) {
-	// Move left or right
-	mPosX += mVelX * timeStep;
-	mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
-	// Move up or down
-	mPosY += mVelY * timeStep;
-	mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
-}
  
 void Pacman::render(int frame) {
 	switch (animState) {

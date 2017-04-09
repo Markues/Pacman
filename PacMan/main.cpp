@@ -51,7 +51,6 @@ int main(int argc, char* args[]) {
 				
 				// Move pacman
 				pacman.update(tileSet, timeStep);
-				//pacman.actuallyMove(timeStep);
 				
 				// Restart step timer
 				stepTimer.start();

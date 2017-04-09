@@ -162,8 +162,6 @@ public:
 	
 	void move(DIRECTION dirToMove);
 	
-	void actuallyMove(float timeStep);
-	
 	virtual void render(int frame);
 	
 	void renderSurrs();
