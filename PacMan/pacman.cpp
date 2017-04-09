@@ -166,12 +166,12 @@ void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
 		directionToTurn = inputDirToTurn;
 		turningPoint.x = tiles[getCurrentTileIndex(mBox.x, mBox.y)]->getBox().x;
 		turningPoint.y = tiles[getCurrentTileIndex(mBox.x, mBox.y)]->getBox().y;
-		printf("Curr:%d,%d Turn:%d,%d\n", mBox.x, mBox.y, turningPoint.x, turningPoint.y);
+		printf("CD Dir:%d Curr:%d,%d Turn:%d,%d\n", directionToTurn, mBox.x, mBox.y, turningPoint.x, turningPoint.y);
 	}
 }
 
 void Pacman::turn() {
-	if(!(fuzzyEquals(mBox.x, turningPoint.x, 1) || !(fuzzyEquals(mBox.y, turningPoint.y, 1)))) {
+	if(!(fuzzyEquals(mBox.x, turningPoint.x, 0) || !(fuzzyEquals(mBox.y, turningPoint.y, 0)))) {
 		return;
 	}
 	
@@ -183,25 +183,30 @@ void Pacman::turn() {
 	move(directionToTurn);
 	
 	directionToTurn = NONE;
+	printf("TURN Pos:%d,%d\n", mBox.x, mBox.y);
 }
 
 void Pacman::move(DIRECTION dirToMove) {
-	printf("Move\n");
+	printf("Please move:%d\n", dirToMove);
 	switch (dirToMove) {
 		case LEFT:
 			mVelX = -ENTITY_VEL;
+			mVelY = 0;
 			animState = P_ANIM_LEFT;
 			break;
 		case RIGHT:
 			mVelX = ENTITY_VEL;
+			mVelY = 0;
 			animState = P_ANIM_RIGHT;
 			break;
 		case UP:
 			mVelY = -ENTITY_VEL;
+			mVelX = 0;
 			animState = P_ANIM_UP;
 			break;
 		case DOWN:
 			mVelY = ENTITY_VEL;
+			mVelX = 0;
 			animState = P_ANIM_DOWN;
 			break;
 		case NONE:
@@ -211,9 +216,11 @@ void Pacman::move(DIRECTION dirToMove) {
 			printf("ERROR: Somehow dirToMove is NONE");
 			break;
 	}
-	 
+	
 	// Update the currentDirection
 	currentDirection = dirToMove;
+	
+	printf("Move Vel:%f,%f Dir:%d\n", mVelX, mVelY, currentDirection);
 }
 
 void Pacman::actuallyMove(float timeStep) {
