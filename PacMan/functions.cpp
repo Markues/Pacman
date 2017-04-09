@@ -233,7 +233,7 @@ bool touchesWall(SDL_Rect box, Tile *tiles[]) {
 }
 
 int getCurrentTileIndex(int xPos, int yPos) {
-	return ((yPos / TILE_HEIGHT) * TOTAL_HORIZONTAL_TILES) + (xPos / TILE_WIDTH);
+	return (((yPos + (SPRITE_HITBOX_HEIGHT / 2)) / TILE_HEIGHT) * TOTAL_HORIZONTAL_TILES) + ((xPos + (SPRITE_HITBOX_WIDTH / 2)) / TILE_WIDTH);
 }
 
 Tile* getTileToLeft(Tile *tiles[], int xPos, int yPos) {
