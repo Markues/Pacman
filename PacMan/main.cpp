@@ -66,7 +66,7 @@ int main(int argc, char* args[]) {
 				
 				// Render dot
 				pacman.render(frame);
-				pacman.renderSurrs();
+				//pacman.renderSurrs();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);

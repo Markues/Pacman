@@ -43,7 +43,6 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 	// Base case
 	if(currentDirection == NONE && directionToTurn == NONE) {
 		move(RIGHT);
-		printf("---------\n");
 	}
 	
 	if(touchesWall(mBox, tiles)) {
@@ -112,7 +111,6 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 	checkInput(tiles);
 	
 	if(directionToTurn != NONE) {
-		printf("Update call turn, dir:%d\n", directionToTurn);
 		turn();
 	}
 }
@@ -139,21 +137,17 @@ void Pacman::checkInput(Tile* tiles[]) {
 }
 
 void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
-	printf("SurrBoxPos:%d,%d Dirs:%d,%d\n", surroundingTiles[inputDirToTurn]->getBox().x, surroundingTiles[inputDirToTurn]->getBox().y, directionToTurn, currentDirection);
-	if(directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER)) {
-		printf("BAIL\n");
+	if(currentDirection == inputDirToTurn || directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER)) {
 		return;
 	}
 	
 	if(areOpposites(currentDirection, inputDirToTurn)) {
-		printf("OPPS");
 		move(inputDirToTurn);
 	}
 	else {
 		directionToTurn = inputDirToTurn;
 		turningPoint.x = tiles[getCurrentTileIndex(mBox.x, mBox.y)]->getBox().x;
 		turningPoint.y = tiles[getCurrentTileIndex(mBox.x, mBox.y)]->getBox().y;
-		printf("CD Dir:%d Curr:%d,%d Turn:%d,%d\n", directionToTurn, mBox.x, mBox.y, turningPoint.x, turningPoint.y);
 	}
 }
 
@@ -167,15 +161,12 @@ void Pacman::turn() {
 	mBox.y = turningPoint.y;
 	mPosY = ((int)mBox.y) - COLL_BOX_OFFSET;
 	
-	printf("Turn Call Move\n");
 	move(directionToTurn);
 	
-	//directionToTurn = NONE;
-	printf("TURN Pos:%d,%d\n", mBox.x, mBox.y);
+	directionToTurn = NONE;
 }
 
 void Pacman::move(DIRECTION dirToMove) {
-	printf("Please move:%d\n", dirToMove);
 	switch (dirToMove) {
 		case LEFT:
 			mVelX = -ENTITY_VEL;
@@ -207,8 +198,6 @@ void Pacman::move(DIRECTION dirToMove) {
 	
 	// Update the currentDirection
 	currentDirection = dirToMove;
-	
-	printf("Move Vel:%f,%f Dir:%d\n", mVelX, mVelY, currentDirection);
 }
  
 void Pacman::render(int frame) {
