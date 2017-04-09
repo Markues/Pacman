@@ -51,7 +51,7 @@ int main(int argc, char* args[]) {
 				
 				// Move pacman
 				pacman.update(tileSet, timeStep);
-				pacman.actuallyMove(timeStep);
+				//pacman.actuallyMove(timeStep);
 				
 				// Restart step timer
 				stepTimer.start();
@@ -67,6 +67,7 @@ int main(int argc, char* args[]) {
 				
 				// Render dot
 				pacman.render(frame);
+				pacman.renderSurrs();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);

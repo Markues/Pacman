@@ -166,6 +166,8 @@ public:
 	
 	virtual void render(int frame);
 	
+	void renderSurrs();
+	
 private:
 	void init();
 	

@@ -33,10 +33,17 @@ void Pacman::init() {
 }
 
 void Pacman::update(Tile* tiles[], float timeStep) {
+	// Move left or right
+	mPosX += mVelX * timeStep;
+	mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
+	// Move up or down
+	mPosY += mVelY * timeStep;
+	mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
+	
 	// Base case
 	if(currentDirection == NONE && directionToTurn == NONE) {
 		move(RIGHT);
-		//return;
+		printf("---------\n");
 	}
 	
 	if(touchesWall(mBox, tiles)) {
@@ -96,39 +103,16 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 		
 	}
 	
+	
 	surroundingTiles[LEFT] = getTileToLeft(tiles, mBox.x, mBox.y);
 	surroundingTiles[RIGHT] = getTileToRight(tiles, mBox.x, mBox.y);
 	surroundingTiles[UP] = getTileAbove(tiles, mBox.x, mBox.y);
 	surroundingTiles[DOWN] = getTileBelow(tiles, mBox.x, mBox.y);
 	
-	/*
-	SDL_Rect temp;
-	SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-	temp.x = surroundingTiles[LEFT]->getBox().x;
-	temp.y = surroundingTiles[LEFT]->getBox().y;
-	temp.w = surroundingTiles[LEFT]->getBox().w;
-	temp.h = surroundingTiles[LEFT]->getBox().h;
-	SDL_RenderDrawRect(gRenderer, &temp);
-	temp.x = surroundingTiles[RIGHT]->getBox().x;
-	temp.y = surroundingTiles[RIGHT]->getBox().y;
-	temp.w = surroundingTiles[RIGHT]->getBox().w;
-	temp.h = surroundingTiles[RIGHT]->getBox().h;
-	SDL_RenderDrawRect(gRenderer, &temp);
-	temp.x = surroundingTiles[UP]->getBox().x;
-	temp.y = surroundingTiles[UP]->getBox().y;
-	temp.w = surroundingTiles[UP]->getBox().w;
-	temp.h = surroundingTiles[UP]->getBox().h;
-	SDL_RenderDrawRect(gRenderer, &temp);
-	temp.x = surroundingTiles[DOWN]->getBox().x;
-	temp.y = surroundingTiles[DOWN]->getBox().y;
-	temp.w = surroundingTiles[DOWN]->getBox().w;
-	temp.h = surroundingTiles[DOWN]->getBox().h;
-	SDL_RenderDrawRect(gRenderer, &temp);
-	*/
-	 
 	checkInput(tiles);
 	
 	if(directionToTurn != NONE) {
+		printf("Update call turn, dir:%d\n", directionToTurn);
 		turn();
 	}
 }
@@ -155,11 +139,14 @@ void Pacman::checkInput(Tile* tiles[]) {
 }
 
 void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
+	printf("SurrBoxPos:%d,%d Dirs:%d,%d\n", surroundingTiles[inputDirToTurn]->getBox().x, surroundingTiles[inputDirToTurn]->getBox().y, directionToTurn, currentDirection);
 	if(directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER)) {
+		printf("BAIL\n");
 		return;
 	}
 	
 	if(areOpposites(currentDirection, inputDirToTurn)) {
+		printf("OPPS");
 		move(inputDirToTurn);
 	}
 	else {
@@ -180,9 +167,10 @@ void Pacman::turn() {
 	mBox.y = turningPoint.y;
 	mPosY = ((int)mBox.y) - COLL_BOX_OFFSET;
 	
+	printf("Turn Call Move\n");
 	move(directionToTurn);
 	
-	directionToTurn = NONE;
+	//directionToTurn = NONE;
 	printf("TURN Pos:%d,%d\n", mBox.x, mBox.y);
 }
 
@@ -264,4 +252,29 @@ void Pacman::render(int frame) {
 		case P_ANIM_DEATH:
 			break;
 	}
+}
+
+void Pacman::renderSurrs() {
+	 SDL_Rect temp;
+	 SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+	 temp.x = surroundingTiles[LEFT]->getBox().x;
+	 temp.y = surroundingTiles[LEFT]->getBox().y;
+	 temp.w = surroundingTiles[LEFT]->getBox().w;
+	 temp.h = surroundingTiles[LEFT]->getBox().h;
+	 SDL_RenderDrawRect(gRenderer, &temp);
+	 temp.x = surroundingTiles[RIGHT]->getBox().x;
+	 temp.y = surroundingTiles[RIGHT]->getBox().y;
+	 temp.w = surroundingTiles[RIGHT]->getBox().w;
+	 temp.h = surroundingTiles[RIGHT]->getBox().h;
+	 SDL_RenderDrawRect(gRenderer, &temp);
+	 temp.x = surroundingTiles[UP]->getBox().x;
+	 temp.y = surroundingTiles[UP]->getBox().y;
+	 temp.w = surroundingTiles[UP]->getBox().w;
+	 temp.h = surroundingTiles[UP]->getBox().h;
+	 SDL_RenderDrawRect(gRenderer, &temp);
+	 temp.x = surroundingTiles[DOWN]->getBox().x;
+	 temp.y = surroundingTiles[DOWN]->getBox().y;
+	 temp.w = surroundingTiles[DOWN]->getBox().w;
+	 temp.h = surroundingTiles[DOWN]->getBox().h;
+	 SDL_RenderDrawRect(gRenderer, &temp);
 }
