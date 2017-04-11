@@ -99,9 +99,7 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 		else if(currentDirection == DOWN) {
 			animState = P_STATIC_DOWN;
 		}
-		
 	}
-	
 	
 	surroundingTiles[LEFT] = getTileToLeft(tiles, mBox.x, mBox.y);
 	surroundingTiles[RIGHT] = getTileToRight(tiles, mBox.x, mBox.y);
@@ -137,7 +135,7 @@ void Pacman::checkInput(Tile* tiles[]) {
 }
 
 void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
-	if(currentDirection == inputDirToTurn || directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER)) {
+	if(currentDirection == inputDirToTurn || directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER_BLINK)) {
 		return;
 	}
 	

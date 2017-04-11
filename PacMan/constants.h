@@ -32,11 +32,13 @@ const int P_NUM_DEATH_SPRITES = 12;
 
 const int P_ANIM_MOVE_FRAMES = 3;
 const int P_ANIM_DEATH_FRAMES = 12;
+const int T_ANIM_POW_FRAMES = 2;
 
 // Moveable tiles
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;
 const int TILE_POWER = 35;
+const int TILE_POWER_BLINK = 99;
 
 enum PACMAN_ANIM_STATE {
 	P_STATIC_NEUTRAL = 0,

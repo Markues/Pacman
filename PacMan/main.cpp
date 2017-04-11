@@ -34,7 +34,8 @@ int main(int argc, char* args[]) {
 			//Keeps track of time between steps
 			GameTimer stepTimer;
 			
-			int frame = 0;
+			int p_frame = 0;
+			int pow_frame = 0;
 			
 			// While application is running
 			while(!quit) {
@@ -46,7 +47,7 @@ int main(int argc, char* args[]) {
 					}
 				}
 				
-				//Calculate time step
+				// Calculate time step
 				float timeStep = stepTimer.getTicks() / 1000.f;
 				
 				// Move pacman
@@ -59,22 +60,41 @@ int main(int argc, char* args[]) {
 				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
 				SDL_RenderClear(gRenderer);
 				
+				// TODO - This should not be hardcoded, instead loaded from data
+				// To come later :)
+				if(pow_frame / 12 == 0) {
+					tileSet[169]->setType(TILE_POWER);
+					tileSet[194]->setType(TILE_POWER);
+					tileSet[729]->setType(TILE_POWER);
+					tileSet[754]->setType(TILE_POWER);
+				}
+				else {
+					tileSet[169]->setType(TILE_POWER_BLINK);
+					tileSet[194]->setType(TILE_POWER_BLINK);
+					tileSet[729]->setType(TILE_POWER_BLINK);
+					tileSet[754]->setType(TILE_POWER_BLINK);
+				}
 				// Render level
 				for(int i = 0; i < TOTAL_TILES; ++i) {
 					tileSet[i]->render();
 				}
 				
 				// Render dot
-				pacman.render(frame);
+				pacman.render(p_frame);
 				//pacman.renderSurrs();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);
 				
-				++frame;
+				++p_frame;
+				++pow_frame;
 				
-				if(frame / 3 >= P_ANIM_MOVE_FRAMES) {
-					frame = 0;
+				// TODO - Make animation class
+				if(p_frame / 3 >= P_ANIM_MOVE_FRAMES) {
+					p_frame = 0;
+				}
+				if(pow_frame / 12 >= T_ANIM_POW_FRAMES) {
+					pow_frame = 0;
 				}
 			}
 		}
