@@ -69,10 +69,10 @@ int main(int argc, char* args[]) {
 					tileSet[754]->setType(TILE_POWER);
 				}
 				else {
-					tileSet[169]->setType(TILE_POWER_BLINK);
-					tileSet[194]->setType(TILE_POWER_BLINK);
-					tileSet[729]->setType(TILE_POWER_BLINK);
-					tileSet[754]->setType(TILE_POWER_BLINK);
+					tileSet[169]->setType(TILE_EMPTY);
+					tileSet[194]->setType(TILE_EMPTY);
+					tileSet[729]->setType(TILE_EMPTY);
+					tileSet[754]->setType(TILE_EMPTY);
 				}
 				// Render level
 				for(int i = 0; i < TOTAL_TILES; ++i) {

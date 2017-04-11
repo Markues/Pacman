@@ -16,10 +16,8 @@ Tile::Tile(int x, int y, int tileType) {
 }
 
 void Tile::render() {
-	int checkedType = mType == TILE_POWER_BLINK ? TILE_EMPTY : mType;
-	
 	// Show the tile
-	gSpriteSheetTexture.render(mBox.x, mBox.y, &gTileClips[checkedType]);
+	gSpriteSheetTexture.render(mBox.x, mBox.y, &gTileClips[mType]);
 }
 
 int Tile::getType() {

@@ -38,7 +38,6 @@ const int T_ANIM_POW_FRAMES = 2;
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;
 const int TILE_POWER = 35;
-const int TILE_POWER_BLINK = 99;
 
 enum PACMAN_ANIM_STATE {
 	P_STATIC_NEUTRAL = 0,

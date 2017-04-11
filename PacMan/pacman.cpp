@@ -135,7 +135,7 @@ void Pacman::checkInput(Tile* tiles[]) {
 }
 
 void Pacman::checkDirection(DIRECTION inputDirToTurn, Tile *tiles[]) {
-	if(currentDirection == inputDirToTurn || directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER_BLINK)) {
+	if(currentDirection == inputDirToTurn || directionToTurn == inputDirToTurn || !(surroundingTiles[inputDirToTurn]->getType() == TILE_EMPTY || surroundingTiles[inputDirToTurn]->getType() == TILE_FOOD || surroundingTiles[inputDirToTurn]->getType() == TILE_POWER)) {
 		return;
 	}
 	
