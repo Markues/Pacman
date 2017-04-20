@@ -98,6 +98,27 @@ private:
 	bool mStarted;
 };
 
+// Animation class
+class Animation {
+public:
+	int maxFrames;
+	bool oscillate;
+	
+	Animation();
+	void animate(int timeStep);
+	
+private:
+	int currentFrame;
+	int frameInc;
+	int frameRate; // Milliseconds
+	long oldTime;
+ 
+public:
+	void setFrameRate(int rate);
+	void setCurrentFrame(int frame);
+	int getCurrentFrame();
+};
+
 // The tile
 class Tile {
 public:
