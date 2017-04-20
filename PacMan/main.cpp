@@ -34,7 +34,6 @@ int main(int argc, char* args[]) {
 			//Keeps track of time between steps
 			GameTimer stepTimer;
 			
-			int p_frame = 0;
 			int pow_frame = 0;
 			
 			// While application is running
@@ -87,13 +86,9 @@ int main(int argc, char* args[]) {
 				// Update screen
 				SDL_RenderPresent(gRenderer);
 				
-				++p_frame;
 				++pow_frame;
 				
-				// TODO - Make animation class
-				if(p_frame / 3 >= P_ANIM_MOVE_FRAMES) {
-					p_frame = 0;
-				}
+				// TODO - Make tile entities
 				if(pow_frame / 12 >= T_ANIM_POW_FRAMES) {
 					pow_frame = 0;
 				}
