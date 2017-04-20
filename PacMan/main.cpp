@@ -48,10 +48,11 @@ int main(int argc, char* args[]) {
 				}
 				
 				// Calculate time step
-				float timeStep = stepTimer.getTicks() / 1000.f;
+				int timeStepMilli = stepTimer.getTicks();
+				float timeStepSec = timeStepMilli / 1000.f;
 				
 				// Move pacman
-				pacman.update(tileSet, timeStep);
+				pacman.update(tileSet, timeStepSec);
 				
 				// Restart step timer
 				stepTimer.start();
@@ -80,7 +81,7 @@ int main(int argc, char* args[]) {
 				}
 				
 				// Render dot
-				pacman.render(p_frame);
+				pacman.render(timeStepMilli);
 				//pacman.renderSurrs();
 				
 				// Update screen

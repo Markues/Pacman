@@ -9,6 +9,10 @@ void Pacman::init() {
 	currentDirection = NONE;
 	directionToTurn = NONE;
 	
+	animation.setFrameRate(P_ANIM_FRAMERATE);
+	animation.maxFrames = 3;
+	animation.oscillate = true;
+	
 	// Move anims
 	for(int i = 0; i < P_SPRITES_PER_ROW; i++) {
 		for(int j = 0; j < P_SPRITES_PER_COL; j++) {
@@ -198,31 +202,34 @@ void Pacman::move(DIRECTION dirToMove) {
 	currentDirection = dirToMove;
 }
  
-void Pacman::render(int frame) {
+void Pacman::render(int timeStep) {
+	animation.animate(timeStep);
+	int currentFrame = animation.getCurrentFrame();
+	
 	switch (animState) {
 		case P_STATIC_NEUTRAL:
 			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[0]);
 			break;
 		case P_ANIM_RIGHT:
-			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[frame / 3]);
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[currentFrame]);
 			break;
 		case P_STATIC_RIGHT:
 			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[1]);
 			break;
 		case P_ANIM_LEFT:
-			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[(frame / 3) + 3]);
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[currentFrame + 3]);
 			break;
 		case P_STATIC_LEFT:
 			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[4]);
 			break;
 		case P_ANIM_UP:
-			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[(frame / 3) + 6]);
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[currentFrame + 6]);
 			break;
 		case P_STATIC_UP:
 			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[7]);
 			break;
 		case P_ANIM_DOWN:
-			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[(frame / 3) + 9]);
+			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[currentFrame + 9]);
 			break;
 		case P_STATIC_DOWN:
 			gSpriteSheetTexture.render((int)mPosX, (int)mPosY, &renderBoxes[10]);

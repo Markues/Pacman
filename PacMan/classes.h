@@ -187,7 +187,7 @@ public:
 	
 	void move(DIRECTION dirToMove);
 	
-	virtual void render(int frame);
+	virtual void render(int timeStep);
 	
 	void renderSurrs();
 	
@@ -206,6 +206,7 @@ private:
 	
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;
+	const int P_ANIM_FRAMERATE = 50;
 };
 
 #endif
