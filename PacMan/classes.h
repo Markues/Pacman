@@ -158,11 +158,13 @@ public:
 	MoveableEntity(int startX, int startY);
 	
 	// Shows the entity on the screen
-	virtual void render(int frame) = 0;
+	virtual void render(int timeStep) = 0;
 	
 protected:
 	// Collision box
 	SDL_Rect mBox;
+	
+	Animation animation;
 	
 	float mPosX, mPosY;
 	float mVelX, mVelY;
