@@ -104,6 +104,16 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 			animState = P_STATIC_DOWN;
 		}
 	}
+
+	// Tunnel checks
+	if(mPosX < -ENTITY_WIDTH) {
+		mPosX = LEVEL_WIDTH;
+		mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
+	}
+	else if(mPosX > LEVEL_WIDTH) {
+		mPosX = -ENTITY_WIDTH;
+		mBox.x = ((int)mPosX) + COLL_BOX_OFFSET;
+	}
 	
 	surroundingTiles[LEFT] = getTileToLeft(tiles, mBox.x, mBox.y);
 	surroundingTiles[RIGHT] = getTileToRight(tiles, mBox.x, mBox.y);
