@@ -20,6 +20,10 @@ const int SPRITE_HITBOX_WIDTH = 8;
 const int SPRITE_HITBOX_HEIGHT = 8;
 
 const int TOTAL_TILES = 1008;
+const int NUM_HORIZ_TILES = 28;
+const int NUM_VERT_TILES = 36;
+const int NON_COLL_TILES_TOP = NUM_HORIZ_TILES * 3;
+const int NON_COLL_TILES_BOT = NUM_HORIZ_TILES * 2;
 const int TILES_PER_ROW = 16;
 const int NUM_TILE_ROWS = 3;
 const int TOTAL_TILE_SPRITES = 36;
