@@ -91,19 +91,6 @@ void Pacman::update(Tile* tiles[], float timeStep) {
 				break;
 		}
 	}
-	// If Pacman went too far up or down (tunnel)
-	else if(mBox.x < 0 || mBox.x + ENTITY_WIDTH / 2 > LEVEL_WIDTH) {
-		// move back
-		mPosY -= mVelY * timeStep;
-		mBox.y = ((int)mPosY) + COLL_BOX_OFFSET;
-		mVelY = 0;
-		if(currentDirection == UP) {
-			animState = P_STATIC_UP;
-		}
-		else if(currentDirection == DOWN) {
-			animState = P_STATIC_DOWN;
-		}
-	}
 
 	// Tunnel checks
 	if(mPosX < -ENTITY_WIDTH) {
@@ -137,10 +124,16 @@ void Pacman::checkInput(Tile* tiles[]) {
 		checkDirection(RIGHT, tiles);
 	}
 	else if(currentKeyState[SDL_SCANCODE_UP]) {
-		checkDirection(UP, tiles);
+		// Up key only works while not transitioning via tunnel
+		if(mBox.x >= 0 && mBox.x + ENTITY_WIDTH / 2 <= LEVEL_WIDTH) {
+			checkDirection(UP, tiles);
+		}
 	}
 	else if(currentKeyState[SDL_SCANCODE_DOWN]) {
-		checkDirection(DOWN, tiles);
+		// Down key only works while not transitioning via tunnel
+		if(mBox.x >= 0 && mBox.x + ENTITY_WIDTH / 2 <= LEVEL_WIDTH) {
+			checkDirection(DOWN, tiles);
+		}
 	}
 	else {
 		// Forces user to hold key to turn
