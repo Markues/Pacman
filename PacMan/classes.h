@@ -160,6 +160,9 @@ public:
 	// Shows the entity on the screen
 	virtual void render(int timeStep) = 0;
 	
+	// Get the collision box
+	SDL_Rect getBox();
+	
 protected:
 	// Collision box
 	SDL_Rect mBox;

@@ -13,3 +13,7 @@ MoveableEntity::MoveableEntity(int startX, int startY) {
 	mVelX = 0;
 	mVelY = 0;
 }
+
+SDL_Rect MoveableEntity::getBox() {
+	return mBox;
+}
