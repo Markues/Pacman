@@ -53,7 +53,7 @@ bool init() {
 	return success;
 }
 
-bool loadMedia(Tile* tiles[]) {
+bool loadMedia(Tile* tiles[], Food* foodTiles[]) {
 	// Loading success flag
 	bool success = true;
 	
@@ -64,7 +64,7 @@ bool loadMedia(Tile* tiles[]) {
 	}
 	
 	// Load tile map
-	if(!setTiles(tiles)) {
+	if(!setTiles(tiles, foodTiles)) {
 		printf("Failed to load tile set!\n");
 		success = false;
 	}
@@ -135,7 +135,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b) {
 	return true;
 }
 
-bool setTiles(Tile *tiles[]) {
+bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 	// Success flag
 	bool tilesLoaded = true;
 	
@@ -169,7 +169,14 @@ bool setTiles(Tile *tiles[]) {
 			
 			// If the number is a valid tile number
 			if((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
-				tiles[i] = new Tile(x, y, tileType);
+				if(tileType == TILE_FOOD || tileType == TILE_POWER) {
+					foodTiles[activeFood] = new Food(x, y, tileType);
+					activeFood += 1;
+					tiles[i] = new Tile(x, y, TILE_EMPTY);
+				}
+				else {
+					tiles[i] = new Tile(x, y, tileType);
+				}
 			}
 			// If we don't recognize the tile type
 			else {
