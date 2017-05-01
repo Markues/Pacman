@@ -34,8 +34,6 @@ int main(int argc, char* args[]) {
 			//Keeps track of time between steps
 			GameTimer stepTimer;
 			
-			int pow_frame = 0;
-			
 			// While application is running
 			while(!quit) {
 				// Handle events on queue
@@ -59,21 +57,7 @@ int main(int argc, char* args[]) {
 				// Clear screen
 				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
 				SDL_RenderClear(gRenderer);
-				
-				// TODO - This should not be hardcoded, instead loaded from data
-				// To come later :)
-				if(pow_frame / 12 == 0) {
-					tileSet[169]->setType(TILE_POWER);
-					tileSet[194]->setType(TILE_POWER);
-					tileSet[729]->setType(TILE_POWER);
-					tileSet[754]->setType(TILE_POWER);
-				}
-				else {
-					tileSet[169]->setType(TILE_EMPTY);
-					tileSet[194]->setType(TILE_EMPTY);
-					tileSet[729]->setType(TILE_EMPTY);
-					tileSet[754]->setType(TILE_EMPTY);
-				}
+
 				// Render level
 				for(int i = 0; i < TOTAL_TILES; ++i) {
 					tileSet[i]->render();
@@ -85,13 +69,6 @@ int main(int argc, char* args[]) {
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);
-				
-				++pow_frame;
-				
-				// TODO - Make tile entities
-				if(pow_frame / 12 >= T_ANIM_POW_FRAMES) {
-					pow_frame = 0;
-				}
 			}
 		}
 		
