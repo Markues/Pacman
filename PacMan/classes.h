@@ -136,7 +136,7 @@ public:
 	// Get the collision box
 	SDL_Rect getBox();
 	
-private:
+protected:
 	// The attributes of the tile
 	SDL_Rect mBox;
 	
@@ -207,6 +207,30 @@ private:
 	const int SPRITE_START_Y = 144;
 	const int DEATH_ANIM_START_X = 64;
 	const int P_ANIM_FRAMERATE = 50;
+};
+
+class Food: private Tile {
+public:
+	Food(int x, int y, int type):
+	Tile(x, y, type) {
+		init();
+	};
+	
+	void update(Pacman* pacman);
+	
+	void render(int timeStep);
+	
+private:
+	void init();
+	
+	int mPosX;
+	int mPosY;
+	
+	Animation animation;
+	
+	bool isEaten;
+	
+	const int F_ANIM_FRAMERATE = 200;
 };
 
 #endif
