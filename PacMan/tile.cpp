@@ -1,6 +1,5 @@
 #include "classes.h"
 #include "globals.h"
-#include "functions.h"
 
 Tile::Tile(int x, int y, int tileType) {
 	// Get the offsets
