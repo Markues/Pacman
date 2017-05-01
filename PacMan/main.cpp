@@ -16,9 +16,11 @@ int main(int argc, char* args[]) {
 	else {
 		// The level tiles
 		Tile* tileSet[TOTAL_TILES];
+		// The food tiles
+		Food* foodSet[TOTAL_FOOD];
 		
 		// Load media
-		if(!loadMedia(tileSet)) {
+		if(!loadMedia(tileSet, foodSet)) {
 			printf( "Failed to load media!\n" );
 		}
 		else {
@@ -51,6 +53,11 @@ int main(int argc, char* args[]) {
 				// Move pacman
 				pacman.update(tileSet, timeStepSec);
 				
+				// Check to see if Pacman ate any food
+				for(int i = 0; i < TOTAL_FOOD; ++i) {
+					foodSet[i]->update(&pacman);
+				}
+				
 				// Restart step timer
 				stepTimer.start();
 				
@@ -61,6 +68,10 @@ int main(int argc, char* args[]) {
 				// Render level
 				for(int i = 0; i < TOTAL_TILES; ++i) {
 					tileSet[i]->render();
+				}
+				// Render the food
+				for(int i = 0; i < TOTAL_FOOD; ++i) {
+					foodSet[i]->render(timeStepMilli);
 				}
 				
 				// Render dot
