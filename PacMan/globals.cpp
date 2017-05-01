@@ -11,3 +11,5 @@ SDL_Renderer* gRenderer = NULL;
 // Scene textures
 GameTexture gSpriteSheetTexture;
 SDL_Rect gTileClips[TOTAL_TILE_SPRITES];
+
+int activeFood = 0;
