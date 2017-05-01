@@ -30,7 +30,6 @@ int main(int argc, char* args[]) {
 			// Event handler
 			SDL_Event e;
 			
-			// The dot that will be moving around on the screen
 			Pacman pacman(104, 204);
 			
 			//Keeps track of time between steps
@@ -74,7 +73,7 @@ int main(int argc, char* args[]) {
 					foodSet[i]->render(timeStepMilli);
 				}
 				
-				// Render dot
+				// Render Pacman
 				pacman.render(timeStepMilli);
 				//pacman.renderSurrs();
 				
