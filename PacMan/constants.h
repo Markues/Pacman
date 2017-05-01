@@ -20,6 +20,7 @@ const int SPRITE_HITBOX_WIDTH = 8;
 const int SPRITE_HITBOX_HEIGHT = 8;
 
 const int TOTAL_TILES = 1008;
+const int TOTAL_FOOD = 244;
 const int NUM_HORIZ_TILES = 28;
 const int NUM_VERT_TILES = 36;
 const int NON_COLL_TILES_TOP = NUM_HORIZ_TILES * 3;
@@ -38,10 +39,14 @@ const int P_ANIM_MOVE_FRAMES = 3;
 const int P_ANIM_DEATH_FRAMES = 12;
 const int T_ANIM_POW_FRAMES = 2;
 
-// Moveable tiles
 const int TILE_EMPTY = 32;
 const int TILE_FOOD = 34;
 const int TILE_POWER = 35;
+
+const int FOOD_HITBOX_OFFSET_H = TILE_WIDTH / 2;
+const int FOOD_HITBOX_OFFSET_V = TILE_HEIGHT / 2;
+const int FOOD_HITBOX_WIDTH = 1;
+const int FOOD_HITBOX_HEIGHT = 1;
 
 enum PACMAN_ANIM_STATE {
 	P_STATIC_NEUTRAL = 0,
