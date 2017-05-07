@@ -45,39 +45,17 @@ int main(int argc, char* args[]) {
 					if(e.type == SDL_QUIT) {
 						quit = true;
 					}
+					if(e.type == SDL_KEYDOWN && e.key.repeat == 0) {
+						if(e.key.keysym.sym == SDLK_ESCAPE) {
+							if(gamestate == PAUSED) {
+								gamestate = PLAYING; // Unpause
+							}
+							else {
+								gamestate = PAUSED;
+							}
+						}
+					}
 				}
-				
-				// Calculate time step
-				int timeStepMilli = stepTimer.getTicks();
-				float timeStepSec = timeStepMilli / 1000.f;
-				
-				// Move pacman
-				pacman.update(tileSet, timeStepSec);
-				
-				// Check to see if Pacman ate any food
-				for(int i = 0; i < TOTAL_FOOD; ++i) {
-					foodSet[i]->update(&pacman);
-				}
-				
-				// Restart step timer
-				stepTimer.start();
-				
-				// Clear screen
-				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
-				SDL_RenderClear(gRenderer);
-
-				// Render level
-				for(int i = 0; i < TOTAL_TILES; ++i) {
-					tileSet[i]->render();
-				}
-				// Render the food
-				for(int i = 0; i < TOTAL_FOOD; ++i) {
-					foodSet[i]->render(timeStepMilli);
-				}
-				
-				// Render Pacman
-				pacman.render(timeStepMilli);
-				//pacman.renderSurrs();
 				
 				// Update screen
 				SDL_RenderPresent(gRenderer);
