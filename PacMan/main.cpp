@@ -57,7 +57,29 @@ int main(int argc, char* args[]) {
 					}
 				}
 				
-				if(gamestate == PLAYING) {
+				if(gamestate == LEVELSTART) {
+					float startTimeStep = 0.0f;
+					
+					// Clear screen
+					SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+					SDL_RenderClear(gRenderer);
+					
+					// Render level
+					for(int i = 0; i < TOTAL_TILES; ++i) {
+						tileSet[i]->render();
+					}
+					// Render the food
+					for(int i = 0; i < TOTAL_FOOD; ++i) {
+						foodSet[i]->render(startTimeStep);
+					}
+					
+					// Render Pacman
+					pacman.render(startTimeStep);
+					
+					// Update screen
+					SDL_RenderPresent(gRenderer);
+				}
+				else if(gamestate == PLAYING) {
 					stepTimer.unpause();
 					
 					// Calculate time step
