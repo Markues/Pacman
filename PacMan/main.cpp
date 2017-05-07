@@ -27,7 +27,7 @@ int main(int argc, char* args[]) {
 			// Main loop flag
 			bool quit = false;
 			
-			GAMESTATE gamestate = PLAYING;
+			GAMESTATE gamestate = LEVELSTART;
 			
 			// Event handler
 			SDL_Event e;
