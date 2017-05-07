@@ -84,7 +84,8 @@ enum GAMESTATE {
 	PLAYING = 1,
 	PAUSED = 2,
 	DEATH = 3,
-	GAMEOVER = 4
+	GAMEOVER = 4,
+	LEVELCOMPLETE = 5
 };
 
 #endif
