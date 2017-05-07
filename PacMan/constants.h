@@ -79,4 +79,12 @@ enum DIRECTION {
 	NONE = 4
 };
 
+enum GAMESTATE {
+	LEVELSTART = 0,
+	PLAYING = 1,
+	PAUSED = 2,
+	DEATH = 3,
+	GAMEOVER = 4
+};
+
 #endif
