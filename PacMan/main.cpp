@@ -57,8 +57,47 @@ int main(int argc, char* args[]) {
 					}
 				}
 				
-				// Update screen
-				SDL_RenderPresent(gRenderer);
+				if(gamestate == PLAYING) {
+					stepTimer.unpause();
+					
+					// Calculate time step
+					int timeStepMilli = stepTimer.getTicks();
+					float timeStepSec = timeStepMilli / 1000.f;
+					
+					// Move pacman
+					pacman.update(tileSet, timeStepSec);
+					
+					// Check to see if Pacman ate any food
+					for(int i = 0; i < TOTAL_FOOD; ++i) {
+						foodSet[i]->update(&pacman);
+					}
+					
+					// Restart step timer
+					stepTimer.start();
+					
+					// Clear screen
+					SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+					SDL_RenderClear(gRenderer);
+					
+					// Render level
+					for(int i = 0; i < TOTAL_TILES; ++i) {
+						tileSet[i]->render();
+					}
+					// Render the food
+					for(int i = 0; i < TOTAL_FOOD; ++i) {
+						foodSet[i]->render(timeStepMilli);
+					}
+					
+					// Render Pacman
+					pacman.render(timeStepMilli);
+					//pacman.renderSurrs();
+					
+					// Update screen
+					SDL_RenderPresent(gRenderer);
+				}
+				else if(gamestate == PAUSED) {
+					stepTimer.pause();
+				}
 			}
 		}
 		
