@@ -46,13 +46,13 @@ int main(int argc, char* args[]) {
 						quit = true;
 					}
 					if(e.type == SDL_KEYDOWN && e.key.repeat == 0) {
-						if(e.key.keysym.sym == SDLK_ESCAPE) {
-							if(gamestate == PAUSED) {
-								gamestate = PLAYING; // Unpause
-							}
-							else {
-								gamestate = PAUSED;
-							}
+						switch(e.key.keysym.sym) {
+							case SDLK_ESCAPE:
+								gamestate = gamestate == PAUSED ? PLAYING : PAUSED;
+								break;
+							case SDLK_RETURN:
+								gamestate = gamestate == LEVELSTART ? PLAYING : gamestate;
+								break;
 						}
 					}
 				}
