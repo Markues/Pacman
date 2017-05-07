@@ -27,6 +27,8 @@ int main(int argc, char* args[]) {
 			// Main loop flag
 			bool quit = false;
 			
+			GAMESTATE gamestate = PLAYING;
+			
 			// Event handler
 			SDL_Event e;
 			
