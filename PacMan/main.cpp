@@ -34,7 +34,6 @@ int main(int argc, char* args[]) {
 			
 			Pacman pacman(104, 204);
 			
-			//Keeps track of time between steps
 			GameTimer stepTimer;
 			
 			// While application is running
@@ -119,6 +118,7 @@ int main(int argc, char* args[]) {
 				}
 				else if(gamestate == PAUSED) {
 					stepTimer.pause();
+					SDL_Delay(1000.0f / 30); // 30FPS while paused
 				}
 			}
 		}
