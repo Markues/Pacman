@@ -18,7 +18,7 @@ void Pacman::init() {
 		for(int j = 0; j < P_SPRITES_PER_COL; j++) {
 			int currentTile = (i * P_SPRITES_PER_COL) + j;
 			renderBoxes[currentTile].x = i * SPRITE_WIDTH;
-			renderBoxes[currentTile].y = SPRITE_START_Y + (j * SPRITE_HEIGHT);
+			renderBoxes[currentTile].y = P_SPRITE_START_Y + (j * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
 		}
@@ -28,8 +28,8 @@ void Pacman::init() {
 	for(int i = 0; i < P_SPRITES_PER_COL; i++) {
 		for(int j = 0; j < P_SPRITES_PER_ROW; j++) {
 			int currentTile = (i * P_SPRITES_PER_ROW) + j + 12;
-			renderBoxes[currentTile].x = DEATH_ANIM_START_X + (j * SPRITE_WIDTH);
-			renderBoxes[currentTile].y = SPRITE_START_Y + (i * SPRITE_HEIGHT);
+			renderBoxes[currentTile].x = P_DEATH_ANIM_START_X + (j * SPRITE_WIDTH);
+			renderBoxes[currentTile].y = P_SPRITE_START_Y + (i * SPRITE_HEIGHT);
 			renderBoxes[currentTile].w = SPRITE_WIDTH;
 			renderBoxes[currentTile].h = SPRITE_HEIGHT;
 		}
