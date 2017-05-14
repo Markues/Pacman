@@ -241,28 +241,3 @@ void Pacman::render(int timeStep) {
 			break;
 	}
 }
-
-void Pacman::renderSurrs() {
-	 SDL_Rect temp;
-	 SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-	 temp.x = surroundingTiles[LEFT]->getBox().x;
-	 temp.y = surroundingTiles[LEFT]->getBox().y;
-	 temp.w = surroundingTiles[LEFT]->getBox().w;
-	 temp.h = surroundingTiles[LEFT]->getBox().h;
-	 SDL_RenderDrawRect(gRenderer, &temp);
-	 temp.x = surroundingTiles[RIGHT]->getBox().x;
-	 temp.y = surroundingTiles[RIGHT]->getBox().y;
-	 temp.w = surroundingTiles[RIGHT]->getBox().w;
-	 temp.h = surroundingTiles[RIGHT]->getBox().h;
-	 SDL_RenderDrawRect(gRenderer, &temp);
-	 temp.x = surroundingTiles[UP]->getBox().x;
-	 temp.y = surroundingTiles[UP]->getBox().y;
-	 temp.w = surroundingTiles[UP]->getBox().w;
-	 temp.h = surroundingTiles[UP]->getBox().h;
-	 SDL_RenderDrawRect(gRenderer, &temp);
-	 temp.x = surroundingTiles[DOWN]->getBox().x;
-	 temp.y = surroundingTiles[DOWN]->getBox().y;
-	 temp.w = surroundingTiles[DOWN]->getBox().w;
-	 temp.h = surroundingTiles[DOWN]->getBox().h;
-	 SDL_RenderDrawRect(gRenderer, &temp);
-}
