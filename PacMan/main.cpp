@@ -37,6 +37,10 @@ int main(int argc, char* args[]) {
 			SDL_Event e;
 			
 			Pacman pacman(104, 204);
+			Ghost blinky(104, 108, Ghost::BLINKY);
+			Ghost inky(88, 132, Ghost::INKY);
+			Ghost pinky(104, 132, Ghost::PINKY);
+			Ghost clyde(120, 132, Ghost::CLYDE);
 			
 			GameTimer stepTimer;
 			
@@ -79,6 +83,11 @@ int main(int argc, char* args[]) {
 					// Render Pacman
 					pacman.render(startTimeStep);
 					
+					blinky.render(startTimeStep);
+					inky.render(startTimeStep);
+					pinky.render(startTimeStep);
+					clyde.render(startTimeStep);
+					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
 				}
@@ -115,7 +124,11 @@ int main(int argc, char* args[]) {
 					
 					// Render Pacman
 					pacman.render(timeStepMilli);
-					//pacman.renderSurrs();
+					
+					blinky.render(timeStepMilli);
+					inky.render(timeStepMilli);
+					pinky.render(timeStepMilli);
+					clyde.render(timeStepMilli);
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
