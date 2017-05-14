@@ -1,7 +1,8 @@
 #include <SDL2_image/SDL_image.h>
 #include "constants.h"
-#include "globals.h"
 #include "functions.h"
+#include "globals.h"
+#include "tile.h"
 #include <fstream>
 
 using namespace std;

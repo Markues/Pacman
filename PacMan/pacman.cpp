@@ -1,4 +1,4 @@
-#include "classes.h"
+#include "pacman.h"
 #include "globals.h"
 #include "functions.h"
 #include <math.h>

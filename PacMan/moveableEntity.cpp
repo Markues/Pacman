@@ -1,4 +1,4 @@
-#include "classes.h"
+#include "moveableEntity.h"
 
 MoveableEntity::MoveableEntity(int startX, int startY) {
 	// Initialize the collision box

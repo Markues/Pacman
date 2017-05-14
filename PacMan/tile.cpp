@@ -1,4 +1,4 @@
-#include "classes.h"
+#include "tile.h"
 #include "globals.h"
 
 Tile::Tile(int x, int y, int tileType) {

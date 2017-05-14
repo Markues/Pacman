@@ -1,6 +1,6 @@
 #include <SDL2_image/SDL_image.h>
 #include <string>
-#include "classes.h"
+#include "gameTexture.h"
 #include "globals.h"
 
 using namespace std;

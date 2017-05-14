@@ -1,7 +1,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include "classes.h"
+#include "gameTexture.h"
+#include "tile.h"
 
 // The window we'll be rendering to
 extern SDL_Window* gWindow;

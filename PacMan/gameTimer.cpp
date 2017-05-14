@@ -1,4 +1,5 @@
-#include "classes.h"
+#include <SDL2/SDL.h>
+#include "gameTimer.h"
 
 GameTimer::GameTimer() {
 	// Initialize the variables

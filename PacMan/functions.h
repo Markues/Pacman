@@ -1,6 +1,9 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include "tile.h"
+#include "food.h"
+
 // Starts up SDL and creates window
 bool init();
 

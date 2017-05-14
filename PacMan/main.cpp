@@ -2,9 +2,13 @@
 #include <SDL2_image/SDL_image.h>
 #include <string>
 #include "constants.h"
-#include "classes.h"
 #include "functions.h"
+#include "food.h"
+#include "gameTimer.h"
+#include "ghost.h"
 #include "globals.h"
+#include "pacman.h"
+#include "tile.h"
 
 using namespace std;
 
