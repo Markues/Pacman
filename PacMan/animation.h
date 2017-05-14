@@ -1,13 +1,24 @@
-//
-//  animation.h
-//  PacMan
-//
-//  Created by Jeff Farris on 5/14/17.
-//  Copyright © 2017 Markues. All rights reserved.
-//
+#ifndef ANIMATION_H
+#define ANIMATION_H
 
-#ifndef animation_h
-#define animation_h
+class Animation {
+public:
+	int maxFrames;
+	bool oscillate;
+	
+	Animation();
+	void animate(int timeStep);
+	
+private:
+	int currentFrame;
+	int frameInc;
+	int frameRate; // Milliseconds
+	long oldTime;
+ 
+public:
+	void setFrameRate(int rate);
+	void setCurrentFrame(int frame);
+	int getCurrentFrame();
+};
 
-
-#endif /* animation_h */
+#endif
