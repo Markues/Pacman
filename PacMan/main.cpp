@@ -19,9 +19,9 @@ int main(int argc, char* args[]) {
 	}
 	else {
 		// The level tiles
-		Tile* tileSet[TOTAL_TILES];
+		Tile* tileSet[Tile::TOTAL_TILES];
 		// The food tiles
-		Food* foodSet[TOTAL_FOOD];
+		Food* foodSet[Food::TOTAL_FOOD];
 		
 		// Load media
 		if(!loadMedia(tileSet, foodSet)) {
@@ -68,11 +68,11 @@ int main(int argc, char* args[]) {
 					SDL_RenderClear(gRenderer);
 					
 					// Render level
-					for(int i = 0; i < TOTAL_TILES; ++i) {
+					for(int i = 0; i < Tile::TOTAL_TILES; ++i) {
 						tileSet[i]->render();
 					}
 					// Render the food
-					for(int i = 0; i < TOTAL_FOOD; ++i) {
+					for(int i = 0; i < Food::TOTAL_FOOD; ++i) {
 						foodSet[i]->render(startTimeStep);
 					}
 					
@@ -93,7 +93,7 @@ int main(int argc, char* args[]) {
 					pacman.update(tileSet, timeStepSec);
 					
 					// Check to see if Pacman ate any food
-					for(int i = 0; i < TOTAL_FOOD; ++i) {
+					for(int i = 0; i < Food::TOTAL_FOOD; ++i) {
 						foodSet[i]->update(&pacman);
 					}
 					
@@ -105,11 +105,11 @@ int main(int argc, char* args[]) {
 					SDL_RenderClear(gRenderer);
 					
 					// Render level
-					for(int i = 0; i < TOTAL_TILES; ++i) {
+					for(int i = 0; i < Tile::TOTAL_TILES; ++i) {
 						tileSet[i]->render();
 					}
 					// Render the food
-					for(int i = 0; i < TOTAL_FOOD; ++i) {
+					for(int i = 0; i < Food::TOTAL_FOOD; ++i) {
 						foodSet[i]->render(timeStepMilli);
 					}
 					

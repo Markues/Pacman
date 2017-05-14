@@ -75,7 +75,7 @@ bool loadMedia(Tile* tiles[], Food* foodTiles[]) {
 
 void close(Tile* tiles[]) {
 	// Deallocate tiles
-	for(int i = 0; i < TOTAL_TILES; ++i) {
+	for(int i = 0; i < Tile::TOTAL_TILES; ++i) {
 		if(tiles[i] == NULL) {
 			delete tiles[ i ];
 			tiles[i] = NULL;
@@ -153,7 +153,7 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 	}
 	else {
 		// Initialize the tiles
-		for(int i = 0; i < TOTAL_TILES; ++i) {
+		for(int i = 0; i < Tile::TOTAL_TILES; ++i) {
 			// Determines what kind of tile will be made
 			int tileType = -1;
 			
@@ -169,11 +169,11 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 			}
 			
 			// If the number is a valid tile number
-			if((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
-				if(tileType == TILE_FOOD || tileType == TILE_POWER) {
+			if((tileType >= 0) && (tileType < Tile::TOTAL_TILE_SPRITES)) {
+				if(tileType == Tile::TILE_FOOD || tileType == Tile::TILE_POWER) {
 					foodTiles[activeFood] = new Food(x, y, tileType);
 					activeFood += 1;
-					tiles[i] = new Tile(x, y, TILE_EMPTY);
+					tiles[i] = new Tile(x, y, Tile::TILE_EMPTY);
 				}
 				else {
 					tiles[i] = new Tile(x, y, tileType);
@@ -188,7 +188,7 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 			}
 			
 			// Move to next tile spot
-			x += TILE_WIDTH;
+			x += Tile::TILE_WIDTH;
 			
 			// If we've gone too far
 			if(x >= LEVEL_WIDTH) {
@@ -196,20 +196,20 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 				x = 0;
 				
 				// Move to the next row
-				y += TILE_HEIGHT;
+				y += Tile::TILE_HEIGHT;
 			}
 		}
 		
 		// Clip the sprite sheet
 		if(tilesLoaded) {
-			for(int i = 0; i < NUM_TILE_ROWS; i++) {
-				for(int j = 0; j < TILES_PER_ROW; j++) {
-					int currentTile = (i * TILES_PER_ROW) + j;
-					gTileClips[currentTile].x = j * TILE_WIDTH;
-					gTileClips[currentTile].y = i * TILE_HEIGHT;
-					gTileClips[currentTile].w = TILE_WIDTH;
-					gTileClips[currentTile].h = TILE_HEIGHT;
-					if(currentTile >= TOTAL_TILES) {
+			for(int i = 0; i < Tile::NUM_TILE_ROWS; i++) {
+				for(int j = 0; j < Tile::TILES_PER_ROW; j++) {
+					int currentTile = (i * Tile::TILES_PER_ROW) + j;
+					gTileClips[currentTile].x = j * Tile::TILE_WIDTH;
+					gTileClips[currentTile].y = i * Tile::TILE_HEIGHT;
+					gTileClips[currentTile].w = Tile::TILE_WIDTH;
+					gTileClips[currentTile].h = Tile::TILE_HEIGHT;
+					if(currentTile >= Tile::TOTAL_TILES) {
 						break;
 					}
 				}
@@ -226,9 +226,9 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 
 bool touchesWall(SDL_Rect box, Tile *tiles[]) {
 	// Go through the tiles
-	for(int i = NON_COLL_TILES_TOP; i < TOTAL_TILES - NON_COLL_TILES_BOT; ++i) {
+	for(int i = Tile::NON_COLL_TILES_TOP; i < Tile::TOTAL_TILES - Tile::NON_COLL_TILES_BOT; ++i) {
 		// If the tile is a wall type tile
-		if(tiles[i]->getType() != TILE_EMPTY) {
+		if(tiles[i]->getType() != Tile::TILE_EMPTY) {
 			// If the collision box touches the wall tile
 			if(checkCollision(box, tiles[i]->getBox())) {
 				return true;
@@ -241,7 +241,7 @@ bool touchesWall(SDL_Rect box, Tile *tiles[]) {
 }
 
 int getCurrentTileIndex(int xPos, int yPos) {
-	return (((yPos + (SPRITE_HITBOX_HEIGHT / 2)) / TILE_HEIGHT) * TOTAL_HORIZONTAL_TILES) + ((xPos + (SPRITE_HITBOX_WIDTH / 2)) / TILE_WIDTH);
+	return (((yPos + (SPRITE_HITBOX_HEIGHT / 2)) / Tile::TILE_HEIGHT) * Tile::TOTAL_HORIZONTAL_TILES) + ((xPos + (SPRITE_HITBOX_WIDTH / 2)) / Tile::TILE_WIDTH);
 }
 
 Tile* getTileToLeft(Tile *tiles[], int xPos, int yPos) {
@@ -259,13 +259,13 @@ Tile* getTileToRight(Tile *tiles[], int xPos, int yPos) {
 Tile* getTileAbove(Tile *tiles[], int xPos, int yPos) {
 	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
 
-	return tiles[currentTileIndex - TOTAL_HORIZONTAL_TILES];
+	return tiles[currentTileIndex - Tile::TOTAL_HORIZONTAL_TILES];
 }
 
 Tile* getTileBelow(Tile *tiles[], int xPos, int yPos) {
 	int currentTileIndex = getCurrentTileIndex(xPos, yPos);
 	
-	return tiles[currentTileIndex + TOTAL_HORIZONTAL_TILES];
+	return tiles[currentTileIndex + Tile::TOTAL_HORIZONTAL_TILES];
 	
 }
 

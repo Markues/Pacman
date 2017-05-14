@@ -12,7 +12,7 @@ extern SDL_Renderer* gRenderer;
 
 // Scene textures
 extern GameTexture gSpriteSheetTexture;
-extern SDL_Rect gTileClips[TOTAL_TILE_SPRITES];
+extern SDL_Rect gTileClips[Tile::TOTAL_TILE_SPRITES];
 
 extern int activeFood;
 
