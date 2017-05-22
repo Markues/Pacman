@@ -11,7 +11,7 @@ bool init() {
 	bool success = true;
 	
 	// Initialize SDL
-	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		success = false;
 	}
@@ -46,6 +46,12 @@ bool init() {
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 					success = false;
 				}
+				
+				// Initialize SDL_mixer
+				if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+					printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+					success = false;
+				}
 			}
 		}
 	}
@@ -66,6 +72,23 @@ bool loadMedia(Tile* tiles[], Food* foodTiles[]) {
 	// Load tile map
 	if(!setTiles(tiles, foodTiles)) {
 		printf("Failed to load tile set!\n");
+		success = false;
+	}
+	
+	// Load sound effects
+	gIntro = Mix_LoadMUS("pacman_sfx/intro.wav");
+	if(gIntro == NULL) {
+		printf("Failed to load intro sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+	gEatA = Mix_LoadWAV("pacman_sfx/munch A.wav");
+	if(gEatA == NULL) {
+		printf("Failed to load eatA sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+	gEatB = Mix_LoadWAV("pacman_sfx/munch B.wav");
+	if(gEatB == NULL) {
+		printf("Failed to load eatB sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 	
@@ -106,6 +129,7 @@ void close(Tile* tiles[], Food* food[]) {
 	gRenderer = NULL;
 	
 	// Quit SDL subsystems
+	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
