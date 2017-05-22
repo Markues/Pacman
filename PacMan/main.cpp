@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include <SDL2_mixer/SDL_mixer.h>
 #include <string>
 #include "constants.h"
 #include "functions.h"
@@ -11,6 +12,12 @@
 #include "tile.h"
 
 using namespace std;
+
+// make a music finished function
+void musicFinished()
+{
+	gamestate = PLAYING;
+}
 
 int main(int argc, char* args[]) {
 	// Start up SDL and create window
@@ -31,8 +38,6 @@ int main(int argc, char* args[]) {
 			// Main loop flag
 			bool quit = false;
 			
-			GAMESTATE gamestate = LEVELSTART;
-			
 			// Event handler
 			SDL_Event e;
 			
@@ -43,6 +48,11 @@ int main(int argc, char* args[]) {
 			Ghost clyde(120, 132, Ghost::CLYDE);
 			
 			GameTimer stepTimer;
+			
+			Mix_PlayMusic(gIntro, 1);
+			
+			// Don't being play until the music stops
+			Mix_HookMusicFinished(musicFinished);
 			
 			// While application is running
 			while(!quit) {
@@ -56,9 +66,6 @@ int main(int argc, char* args[]) {
 						switch(e.key.keysym.sym) {
 							case SDLK_ESCAPE:
 								gamestate = gamestate == PAUSED ? PLAYING : PAUSED;
-								break;
-							case SDLK_RETURN:
-								gamestate = gamestate == LEVELSTART ? PLAYING : gamestate;
 								break;
 						}
 					}
@@ -141,7 +148,7 @@ int main(int argc, char* args[]) {
 		}
 		
 		// Free resources and close SDL
-		close(tileSet);
+		close(tileSet, foodSet);
 	}
 	
 	return 0;
