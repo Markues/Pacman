@@ -1,5 +1,4 @@
 #include <SDL2_image/SDL_image.h>
-#include "constants.h"
 #include "functions.h"
 #include "globals.h"
 #include "tile.h"
@@ -73,14 +72,29 @@ bool loadMedia(Tile* tiles[], Food* foodTiles[]) {
 	return success;
 }
 
-void close(Tile* tiles[]) {
+void close(Tile* tiles[], Food* food[]) {
 	// Deallocate tiles
 	for(int i = 0; i < Tile::TOTAL_TILES; ++i) {
-		if(tiles[i] == NULL) {
-			delete tiles[ i ];
+		if(tiles[i] != NULL) {
+			delete tiles[i];
 			tiles[i] = NULL;
 		}
 	}
+	
+	// Deallocate food
+	for(int i = 0; i < Food::TOTAL_FOOD; ++i) {
+		if(food[i] != NULL) {
+			delete food[i];
+			food[i] = NULL;
+		}
+	}
+	
+	Mix_FreeMusic(gIntro);
+	Mix_FreeChunk(gEatA);
+	Mix_FreeChunk(gEatB);
+	gIntro = NULL;
+	gEatA = NULL;
+	gEatB = NULL;
 	
 	// Free loaded images
 	gSpriteSheetTexture.free();

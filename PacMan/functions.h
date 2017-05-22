@@ -11,7 +11,7 @@ bool init();
 bool loadMedia(Tile* tiles[], Food* foodTiles[]);
 
 // Frees media and shuts down SDL
-void close(Tile* tiles[]);
+void close(Tile* tiles[], Food* food[]);
 
 // Box collision detector
 bool checkCollision(SDL_Rect a, SDL_Rect b);
