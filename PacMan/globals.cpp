@@ -1,5 +1,3 @@
-#include "gameTexture.h"
-#include "constants.h"
 #include "globals.h"
 
 // The window we'll be rendering to
@@ -12,4 +10,12 @@ SDL_Renderer* gRenderer = NULL;
 GameTexture gSpriteSheetTexture;
 SDL_Rect gTileClips[Tile::TOTAL_TILE_SPRITES];
 
+Mix_Music *gIntro = NULL;
+Mix_Chunk *gEatA = NULL;
+Mix_Chunk *gEatB = NULL;
+
 int activeFood = 0;
+
+bool playFoodSoundA = true;
+
+GAMESTATE gamestate = LEVELSTART;

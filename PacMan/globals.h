@@ -1,6 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+#include <SDL2_mixer/SDL_mixer.h>
 #include "gameTexture.h"
 #include "tile.h"
 
@@ -14,6 +15,14 @@ extern SDL_Renderer* gRenderer;
 extern GameTexture gSpriteSheetTexture;
 extern SDL_Rect gTileClips[Tile::TOTAL_TILE_SPRITES];
 
+extern Mix_Music *gIntro;
+extern Mix_Chunk *gEatA;
+extern Mix_Chunk *gEatB;
+
 extern int activeFood;
+
+extern bool playFoodSoundA;
+
+extern GAMESTATE gamestate;
 
 #endif
