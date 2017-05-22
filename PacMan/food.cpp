@@ -18,8 +18,19 @@ void Food::init() {
 }
 
 void Food::update(Pacman* pacman) {
-	if(checkCollision(mBox, pacman->getBox())) {
+	if(checkCollision(mBox, pacman->getBox()) && isEaten == false) {
 		isEaten = true;
+		
+		if(playFoodSoundA) {
+			Mix_PlayChannel(-1, gEatA, 0);
+			playFoodSoundA = !playFoodSoundA;
+			return;
+		}
+		else {
+			Mix_PlayChannel(-1, gEatB, 0);
+			playFoodSoundA = !playFoodSoundA;
+			return;
+		}
 	}
 }
 
