@@ -1,6 +1,7 @@
 #include <SDL2_image/SDL_image.h>
 #include "functions.h"
 #include "globals.h"
+#include "letter.h"
 #include "tile.h"
 #include <fstream>
 
@@ -70,8 +71,8 @@ bool loadMedia(Tile* tiles[], Food* foodTiles[]) {
 	}
 	
 	// Load tile map
-	if(!setTiles(tiles, foodTiles)) {
-		printf("Failed to load tile set!\n");
+	if(!setTilesAndLetters(tiles, foodTiles)) {
+		printf("Failed to load tiles and letters!\n");
 		success = false;
 	}
 	
@@ -174,7 +175,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b) {
 	return true;
 }
 
-bool setTiles(Tile* tiles[], Food* foodTiles[]) {
+bool setTilesAndLetters(Tile* tiles[], Food* foodTiles[]) {
 	// Success flag
 	bool tilesLoaded = true;
 	
@@ -238,17 +239,25 @@ bool setTiles(Tile* tiles[], Food* foodTiles[]) {
 			}
 		}
 		
-		// Clip the sprite sheet
+		// Clip the sprite sheet (tiles and letters)
 		if(tilesLoaded) {
-			for(int i = 0; i < Tile::NUM_TILE_ROWS; i++) {
+			for(int i = 0; i < Tile::NUM_TILE_ROWS + Letter::NUM_LETTER_ROWS; i++) {
 				for(int j = 0; j < Tile::TILES_PER_ROW; j++) {
-					int currentTile = (i * Tile::TILES_PER_ROW) + j;
-					gTileClips[currentTile].x = j * Tile::TILE_WIDTH;
-					gTileClips[currentTile].y = i * Tile::TILE_HEIGHT;
-					gTileClips[currentTile].w = Tile::TILE_WIDTH;
-					gTileClips[currentTile].h = Tile::TILE_HEIGHT;
-					if(currentTile >= Tile::TOTAL_TILES) {
+					int currentSprite = (i * Tile::TILES_PER_ROW) + j;
+					if(currentSprite >= Tile::TOTAL_TILE_SPRITES + Letter::TOTAL_LETTER_SPRITES) {
 						break;
+					}
+					else if(currentSprite >= Tile::TOTAL_TILE_SPRITES) {
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].x = j * Letter::LETTER_WIDTH;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].y = i * Letter::LETTER_HEIGHT;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].w = Letter::LETTER_WIDTH;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].h = Letter::LETTER_HEIGHT;
+					}
+					else {
+						gTileClips[currentSprite].x = j * Tile::TILE_WIDTH;
+						gTileClips[currentSprite].y = i * Tile::TILE_HEIGHT;
+						gTileClips[currentSprite].w = Tile::TILE_WIDTH;
+						gTileClips[currentSprite].h = Tile::TILE_HEIGHT;
 					}
 				}
 			}

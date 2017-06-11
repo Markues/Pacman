@@ -9,6 +9,7 @@ SDL_Renderer* gRenderer = NULL;
 // Scene textures
 GameTexture gSpriteSheetTexture;
 SDL_Rect gTileClips[Tile::TOTAL_TILE_SPRITES];
+SDL_Rect gLetterClips[Letter::TOTAL_LETTER_SPRITES];
 
 Mix_Music *gIntro = NULL;
 Mix_Chunk *gEatA = NULL;

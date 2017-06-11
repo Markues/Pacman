@@ -20,7 +20,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b);
 bool touchesWall(SDL_Rect box, Tile* tiles[]);
 
 // Sets tiles from tile map
-bool setTiles(Tile* tiles[], Food* foodTiles[]);
+bool setTilesAndLetters(Tile* tiles[], Food* foodTiles[]);
 
 int getCurrentTileIndex(int xPos, int yPos);
 Tile* getTileToLeft(Tile* tiles[], int xPos, int yPos);
