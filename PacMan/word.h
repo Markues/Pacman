@@ -2,6 +2,10 @@
 #define WORD_H
 
 #include "constants.h"
+#include <vector>
+#include <string>
+
+using namespace std;
 
 class Word {
 public:
@@ -28,8 +32,12 @@ public:
 	void render();
 	
 protected:
-
+	string theString;
+	
+	int posX;
+	int posY;
+	
+	std::vector<int> letters;
 };
 
 #endif
-
