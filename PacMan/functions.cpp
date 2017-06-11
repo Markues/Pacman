@@ -241,7 +241,7 @@ bool setTilesAndLetters(Tile* tiles[], Food* foodTiles[]) {
 		
 		// Clip the sprite sheet (tiles and letters)
 		if(tilesLoaded) {
-			for(int i = 0; i < Tile::NUM_TILE_ROWS + Letter::NUM_LETTER_ROWS; i++) {
+			for(int i = 0; i < Tile::NUM_TILE_ROWS + Letter::NUM_LETTER_ROWS - 1; i++) {
 				for(int j = 0; j < Tile::TILES_PER_ROW; j++) {
 					int currentSprite = (i * Tile::TILES_PER_ROW) + j;
 					if(currentSprite >= Tile::TOTAL_TILE_SPRITES + Letter::TOTAL_LETTER_SPRITES) {
