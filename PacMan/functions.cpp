@@ -1,7 +1,7 @@
 #include <SDL2_image/SDL_image.h>
 #include "functions.h"
 #include "globals.h"
-#include "letter.h"
+#include "word.h"
 #include "tile.h"
 #include <fstream>
 
@@ -241,17 +241,17 @@ bool setTilesAndLetters(Tile* tiles[], Food* foodTiles[]) {
 		
 		// Clip the sprite sheet (tiles and letters)
 		if(tilesLoaded) {
-			for(int i = 0; i < Tile::NUM_TILE_ROWS + Letter::NUM_LETTER_ROWS - 1; i++) {
+			for(int i = 0; i < Tile::NUM_TILE_ROWS + Word::NUM_LETTER_ROWS - 1; i++) {
 				for(int j = 0; j < Tile::TILES_PER_ROW; j++) {
 					int currentSprite = (i * Tile::TILES_PER_ROW) + j;
-					if(currentSprite >= Tile::TOTAL_TILE_SPRITES + Letter::TOTAL_LETTER_SPRITES) {
+					if(currentSprite >= Tile::TOTAL_TILE_SPRITES + Word::TOTAL_LETTER_SPRITES) {
 						break;
 					}
 					else if(currentSprite >= Tile::TOTAL_TILE_SPRITES) {
-						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].x = j * Letter::LETTER_WIDTH;
-						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].y = i * Letter::LETTER_HEIGHT;
-						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].w = Letter::LETTER_WIDTH;
-						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].h = Letter::LETTER_HEIGHT;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].x = j * Word::LETTER_WIDTH;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].y = i * Word::LETTER_HEIGHT;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].w = Word::LETTER_WIDTH;
+						gLetterClips[currentSprite - Tile::TOTAL_TILE_SPRITES].h = Word::LETTER_HEIGHT;
 					}
 					else {
 						gTileClips[currentSprite].x = j * Tile::TILE_WIDTH;
