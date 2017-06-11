@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "pacman.h"
 #include "tile.h"
+#include "word.h"
 
 using namespace std;
 
@@ -46,6 +47,10 @@ int main(int argc, char* args[]) {
 			Ghost inky(88, 132, Ghost::INKY);
 			Ghost pinky(104, 132, Ghost::PINKY);
 			Ghost clyde(120, 132, Ghost::CLYDE);
+			
+			// @TODO - Make an array of words
+			Word high(72, 0, "HIGH");
+			Word score(112, 0, "SCORE");
 			
 			GameTimer stepTimer;
 			
@@ -95,6 +100,10 @@ int main(int argc, char* args[]) {
 					pinky.render(startTimeStep);
 					clyde.render(startTimeStep);
 					
+					// @TODO Iterate over the array of words and render them
+					high.render();
+					score.render();
+					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
 				}
@@ -136,6 +145,10 @@ int main(int argc, char* args[]) {
 					inky.render(timeStepMilli);
 					pinky.render(timeStepMilli);
 					clyde.render(timeStepMilli);
+					
+					// @TODO Iterate over the array of words and render them
+					high.render();
+					score.render();
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
