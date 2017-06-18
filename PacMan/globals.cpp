@@ -20,3 +20,5 @@ int activeFood = 0;
 bool playFoodSoundA = true;
 
 GAMESTATE gamestate = LEVELSTART;
+vector<Word> wordArray;
+int score = 0;

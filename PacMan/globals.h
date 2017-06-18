@@ -26,5 +26,7 @@ extern int activeFood;
 extern bool playFoodSoundA;
 
 extern GAMESTATE gamestate;
+extern vector<Word> wordArray;
+extern int score;
 
 #endif

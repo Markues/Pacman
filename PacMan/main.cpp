@@ -14,11 +14,15 @@
 
 using namespace std;
 
-// make a music finished function
+// Music finished function
 void musicFinished()
 {
 	gamestate = PLAYING;
+	wordArray.pop_back(); // Remove "READY!"
 }
+
+// Function to render a Word
+auto renderWord = [](Word &word){ word.render(); };
 
 int main(int argc, char* args[]) {
 	// Start up SDL and create window
@@ -48,8 +52,9 @@ int main(int argc, char* args[]) {
 			Ghost pinky(104, 132, Ghost::PINKY);
 			Ghost clyde(120, 132, Ghost::CLYDE);
 			
-			// @TODO - Make an array of words
-			Word high_score(72, 0, "HIGH SCORE");
+			wordArray.push_back(Word(72, 0, "HIGH SCORE")); // Position 0
+			wordArray.push_back(Word(40, 8, score)); // Position 1
+			wordArray.push_back(Word(88, 160, "READY!")); // Position 2
 			
 			GameTimer stepTimer;
 			
@@ -99,8 +104,7 @@ int main(int argc, char* args[]) {
 					pinky.render(startTimeStep);
 					clyde.render(startTimeStep);
 					
-					// @TODO Iterate over the array of words and render them
-					high_score.render();
+					for_each(wordArray.begin(), wordArray.end(), renderWord);
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
@@ -144,8 +148,7 @@ int main(int argc, char* args[]) {
 					pinky.render(timeStepMilli);
 					clyde.render(timeStepMilli);
 					
-					// @TODO Iterate over the array of words and render them
-					high_score.render();
+					for_each(wordArray.begin(), wordArray.end(), renderWord);
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);

@@ -5,6 +5,13 @@
 
 using namespace std;
 
+Word::Word() {
+	posX = 0;
+	posY = 0;
+	
+	theString = "";
+}
+
 Word::Word(int x, int y, string newString) {
 	posX = x;
 	posY = y;
@@ -14,6 +21,23 @@ Word::Word(int x, int y, string newString) {
 	for(int i = 0; i < theString.size(); i++) {
 		letters.push_back((int)theString[i]);
 	}
+}
+
+void Word::setWord(string newString) {
+	theString = newString;
+	
+	letters.clear();
+	for(int i = 0; i < theString.size(); i++) {
+		letters.push_back((int)theString[i]);
+	}
+}
+
+void Word::setWord(char newString[]) {
+	setWord(string(newString));
+}
+
+void Word::setScore(int newScore) {
+	setWord(to_string(newScore));
 }
 
 void Word::render() {
