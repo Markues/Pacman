@@ -21,6 +21,9 @@ void Food::update(Pacman* pacman) {
 	if(checkCollision(mBox, pacman->getBox()) && isEaten == false) {
 		isEaten = true;
 		
+		score += 10;
+		wordArray[1].setScore(score);
+		
 		if(playFoodSoundA) {
 			Mix_PlayChannel(-1, gEatA, 0);
 			playFoodSoundA = !playFoodSoundA;
