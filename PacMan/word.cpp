@@ -40,6 +40,9 @@ void Word::render() {
 		else if(letters[i] == 33) { // Exclamation
 			gSpriteSheetTexture.render(posX + (i * LETTER_WIDTH), posY, &gLetterClips[letters[i] - EXCLAMATION_OFFSET]);
 		}
+		else if(letters[i] == 32) { // Space
+			continue; // Iterate so the x-position increases
+		}
 		// @TODO Figure out how to get these working
 		/*else if(letters[i] == 456) { // Copyright
 			gSpriteSheetTexture.render(posX + (i * LETTER_WIDTH), posY, &gLetterClips[COPYRIGHT_POSITION]);
