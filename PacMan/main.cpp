@@ -21,9 +21,6 @@ void musicFinished()
 	wordArray.pop_back(); // Remove "READY!"
 }
 
-// Function to render a Word
-auto renderWord = [](Word &word){ word.render(); };
-
 int main(int argc, char* args[]) {
 	// Start up SDL and create window
 	if(!init()) {

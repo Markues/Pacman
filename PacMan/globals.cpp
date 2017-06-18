@@ -22,3 +22,8 @@ bool playFoodSoundA = true;
 GAMESTATE gamestate = LEVELSTART;
 vector<Word> wordArray;
 int score = 0;
+
+void increaseScore(int amount) {
+	score += amount;
+	wordArray[1].setScore(score);
+};

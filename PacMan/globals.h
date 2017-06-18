@@ -29,4 +29,12 @@ extern GAMESTATE gamestate;
 extern vector<Word> wordArray;
 extern int score;
 
+// Lambda function to render a Word
+auto renderWord = [](Word &word) {
+	word.render();
+};
+
+// Function to increase score
+extern void increaseScore(int amount);
+
 #endif
