@@ -49,8 +49,7 @@ int main(int argc, char* args[]) {
 			Ghost clyde(120, 132, Ghost::CLYDE);
 			
 			// @TODO - Make an array of words
-			Word high(72, 0, "HIGH");
-			Word score(112, 0, "SCORE");
+			Word high_score(72, 0, "HIGH SCORE");
 			
 			GameTimer stepTimer;
 			
@@ -101,8 +100,7 @@ int main(int argc, char* args[]) {
 					clyde.render(startTimeStep);
 					
 					// @TODO Iterate over the array of words and render them
-					high.render();
-					score.render();
+					high_score.render();
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
@@ -147,8 +145,7 @@ int main(int argc, char* args[]) {
 					clyde.render(timeStepMilli);
 					
 					// @TODO Iterate over the array of words and render them
-					high.render();
-					score.render();
+					high_score.render();
 					
 					// Update screen
 					SDL_RenderPresent(gRenderer);
