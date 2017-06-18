@@ -5,11 +5,31 @@
 
 using namespace std;
 
+string fillWithSpaces(string toFill) {
+	int stringLength = (int)toFill.length();
+	
+	for(int i = 0; i < 7 - stringLength; i++) {
+		toFill.insert(0, " ");
+	}
+	
+	return toFill;
+}
+
 Word::Word() {
 	posX = 0;
 	posY = 0;
 	
 	theString = "";
+}
+
+Word::Word(int newScore) {
+	posX = 0;
+	posY = 8;
+	
+	theString = fillWithSpaces(newScore <= 0 ? "00" :to_string(newScore));
+	for(int i = 0; i < theString.size(); i++) {
+		letters.push_back((int)theString[i]);
+	}
 }
 
 Word::Word(int x, int y, string newString) {
@@ -37,7 +57,7 @@ void Word::setWord(char newString[]) {
 }
 
 void Word::setScore(int newScore) {
-	setWord(to_string(newScore));
+	setWord(fillWithSpaces(newScore <= 0 ? "00" :to_string(newScore)));
 }
 
 void Word::render() {

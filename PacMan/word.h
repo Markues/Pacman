@@ -27,9 +27,9 @@ public:
 	const static int SELECTER_POSITION = 42;
 	
 	Word();
+	Word(int newScore);
 	Word(int x, int y, string newString);
 	Word(int x, int y, char newString[]) : Word(x, y, string(newString)) {};
-	Word(int x, int y, int newScore) : Word(x, y, newScore <= 0 ? "00" : to_string(newScore)) {};
 	
 	void setWord(string newString);
 	void setWord(char newString[]);

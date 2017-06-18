@@ -53,7 +53,7 @@ int main(int argc, char* args[]) {
 			Ghost clyde(120, 132, Ghost::CLYDE);
 			
 			wordArray.push_back(Word(72, 0, "HIGH SCORE")); // Position 0
-			wordArray.push_back(Word(40, 8, score)); // Position 1
+			wordArray.push_back(Word(score)); // Position 1
 			wordArray.push_back(Word(88, 160, "READY!")); // Position 2
 			
 			GameTimer stepTimer;
